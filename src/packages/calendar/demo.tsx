@@ -87,14 +87,16 @@ const CalendarDemo = () => {
       '6ab47cd2': 'This Month',
     },
   })
-  const [date, setDate] = useState('2022-08-10')
-  const [date1, setDate1] = useState(['2020-01-23', '2020-01-26'])
-  const [date2, setDate2] = useState('2020-07-08')
+  const d = new Date()
+  const currDay = `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`
+  const [date, setDate] = useState(currDay)
+  const [date1, setDate1] = useState(['2023-01-23', '2023-11-26'])
+  const [date2, setDate2] = useState('2022-12-08')
   const [date3, setDate3] = useState('')
   const [date4, setDate4] = useState<string[]>([])
-  const [date5, setDate5] = useState<string[]>(['2020-01-23', '2020-01-26'])
-  const [date6, setDate6] = useState<string[]>(['2020-01-23', '2020-01-26'])
-  const [date7, setDate7] = useState<string[]>(['2021-12-23', '2021-12-26'])
+  const [date5, setDate5] = useState<string[]>(['2022-11-23', '2024-01-26'])
+  const [date6, setDate6] = useState<string[]>(['2022-11-23', '2024-01-26'])
+  const [date7, setDate7] = useState<string[]>(['2022-12-23', '2023-08-26'])
   const [dateWeek, setDateWeek] = useState('')
   const [isVisible, setIsVisible] = useState(false)
   const [isVisible1, setIsVisible1] = useState(false)
@@ -205,13 +207,16 @@ const CalendarDemo = () => {
 
   const goDate = () => {
     if (calendarRef.current) {
-      calendarRef.current.scrollToDate('2022-04-01')
+      calendarRef.current.scrollToDate('2023-04-01')
     }
   }
 
   const clickBtn = () => {
     const date = [Utils.date2Str(new Date()), Utils.getDay(6)]
     setDate7(date)
+    if (calendarRef.current) {
+      calendarRef.current.scrollToDate(date[0])
+    }
   }
 
   const clickBtn1 = () => {
@@ -222,18 +227,26 @@ const CalendarDemo = () => {
     const yearMonth = `${year}-${month}`
     const currMonthDays = Utils.getMonthDays(`${year}`, `${month}`)
     setDate7([`${yearMonth}-01`, `${yearMonth}-${currMonthDays}`])
+    if (calendarRef.current) {
+      calendarRef.current.scrollToDate(`${yearMonth}-01`)
+    }
   }
 
   const onDay = (date: Day) => {
     return <span>{date.day <= 9 ? `0${date.day}` : date.day}</span>
   }
+  const onTopInfo = (date: Day) => {
+    let currDate = ''
+    if (date && date.day === 10) {
+      currDate = '☺'
+    }
+    return <span className="info">{currDate}</span>
+  }
 
   const onBottomInfo = (date: Day) => {
     let currDate = ''
-    if (date && date.day <= 10 && date.day > 20) {
-      currDate = ''
-    } else {
-      currDate = 'mid'
+    if (date && date.day === 10) {
+      currDate = '纪念日'
     }
     return <span className="info">{currDate}</span>
   }
@@ -273,7 +286,7 @@ const CalendarDemo = () => {
           visible={isVisible}
           showTitle={false}
           defaultValue={date}
-          startDate="2022-01-11"
+          // startDate="2022-01-11"
           endDate="2029-11-30"
           onClose={closeSwitch}
           onChoose={setChooseValue}
@@ -374,6 +387,7 @@ const CalendarDemo = () => {
           startText="enter"
           endText="leave"
           onDay={onDay}
+          onTopInfo={onTopInfo}
           onBottomInfo={onBottomInfo}
           onClose={closeSwitch6}
           onChoose={setChooseValue6}
@@ -393,8 +407,8 @@ const CalendarDemo = () => {
           visible={isVisible7}
           defaultValue={date7}
           type="range"
-          startDate="2021-12-22"
-          endDate="2022-12-31"
+          startDate="2022-12-22"
+          endDate="2023-12-31"
           onBtn={onBtn}
           onClose={closeSwitch7}
           onChoose={setChooseValue7}

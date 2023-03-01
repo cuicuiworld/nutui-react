@@ -9,7 +9,6 @@ The cascader component is used for the selection of multi-level data. The typica
 ```ts
 // react
 import { Cascader } from '@nutui/nutui-react';
-
 ```
 
 ## Demo
@@ -434,13 +433,21 @@ export default App;
 ```
 :::
 
-### Customize selected color
+### Customize CSS
 
-Pass in `activeColor` to specify the selected color.
+Use configprovider to set custom CSS
+
 :::demo
 ```jsx
 import  React,{useState} from "react";
-import { Cell, Cascader } from '@nutui/nutui-react';
+import { Cell, Cascader, ConfigProvider} from '@nutui/nutui-react';
+
+const customTheme = {
+  nutuiCascaderItemHeight: '48px',
+  nutuiCascaderItemMargin: '0 10px',
+  nutuiCascaderItemPadding: '10px',
+  nutuiCascaderItemBorderBottom: '1px solid #F0F0F0',
+}
 
 const App = () => {
   const [isVisibleDemo6, setIsVisibleDemo6] = useState(false)
@@ -525,18 +532,20 @@ const App = () => {
         setIsVisibleDemo6(true)
       }}
      />
-    <Cascader
-      visible={isVisibleDemo6}
-      color="#008000"
-      tabsColor="#008000"
-      value={value6}
-      title="地址选择"
-      options={optionsDemo6}
-      closeable
-      onClose={()=>{setIsVisibleDemo1(false)}}
-      onChange={change6}
-      onPathChange={onPathChange}
-    />
+    <ConfigProvider theme={customTheme}>
+      <Cascader
+        visible={isVisibleDemo6}
+        color="#3768FA"
+        tabsColor="#3768FA"
+        value={value6}
+        title="Select Address"
+        options={optionsDemo6}
+        closeable
+        onClose={()=>{setIsVisibleDemo1(false)}}
+        onChange={change6}
+        onPathChange={onPathChange}
+      />
+    </ConfigProvider>
     </>
   );
 };
@@ -552,27 +561,28 @@ export default App;
 | ------------- | --------------------------------------------- | -------- | ------ |
 | value         | Selected value                                | Array    | -      |
 | options       | Cascade data                                  | Array    | -      |
-| poppable      | Whether to display the pop-up window status   | Boolean  | true   |
-| visible       | Cascading show hidden states                  | Boolean  | false  |
-| activeColor`1.3.13` | Check the active color                  | String  | -  |
-| tabsColor`1.3.13` | Check the active color at the bottom of tabs  | String  | -  |
-| lazy          | Whether to enable dynamic loading             | Boolean  | false  |
+| poppable      | Whether to display the pop-up window status   | boolean  | `true`   |
+| visible       | Cascading show hidden states                  | boolean  | `false`  |
+| activeColor`1.3.13` | Check the active color                  | string  | -  |
+| checkedIcon`1.4.8` | Checked Item Icon | string | `checklist` |
+| tabsColor`1.3.13` | Check the active color at the bottom of tabs  | string  | -  |
+| lazy          | Whether to enable dynamic loading             | boolean  | `false`  |
 | lazyLoad      | Dynamic loading callback, which takes effect when dynamic loading is enabled   | Function | -      |
-| valueKey      | Customize the field of `value` in the `options` structure     | String   | -      |
-| textKey       | Customize the fields of `text` in the `options` structure     | String   | -      |
-| childrenKey   | Customize the fields of `children` in the `options` structure | String   | -      |
+| valueKey      | Customize the field of `value` in the `options` structure     | string   | -      |
+| textKey       | Customize the fields of `text` in the `options` structure     | string   | -      |
+| childrenKey   | Customize the fields of `children` in the `options` structure | string   | -      |
 | convertConfig | When options is a flat structure that can be converted into a tree structure, configure the conversion rules | Object   | -      |
-| title          | Title | String   | ''      |
-| closeIconPosition | Cancel the button position and inherit the popup component | String   | "top-right"      |
-| close-icon | Customize the close button and inherit the popup component | String   | "close"     |
-| closeable | Whether to display the close button and inherit the popup component | Boolean   | true     |
+| title          | Title | string   | -      |
+| closeIconPosition | Cancel the button position and inherit the popup component | string   | `top-right`      |
+| close-icon | Customize the close button and inherit the popup component | string   | `close`     |
+| closeable | Whether to display the close button and inherit the popup component | boolean   | `true`     |
 
 ### Events
 
 | Event | Description           | Callback parameters |
 | ---------- | ---------------- | ------------------ |
-| onChange     | Triggered when the selected value changes | (value, pathNodes) |
-| onPathChange | Triggered when the selected item changes | (pathNodes)        |
+| onChange     | Triggered when the selected value changes | `value, pathNodes` |
+| onPathChange | Triggered when the selected item changes | `pathNodes`        |
 
 
 ## Theming
@@ -583,18 +593,21 @@ The component provides the following CSS variables, which can be used to customi
 
 | Name | Default Value |
 | --- | --- |
-| --nutui-cascader-font-size | ` $font-size-2` |
-| --nutui-cascader-line-height | ` 22px` |
-| --nutui-cascader-title-padding | `  24px 20px 17px` |
-| --nutui-cascader-title-font-size | ` 18px` |
-| --nutui-cascader-title-line-height | `  20px` |
-| --nutui-cascader-pane-height | ` 342px` |
-| --nutui-cascader-tabs-item-padding | `  0 10px` |
-| --nutui-cascader-bar-padding | `  24px 20px 17px` |
-| --nutui-cascader-bar-font-size | `  $font-size-4` |
-| --nutui-cascader-bar-line-height | ` 20px` |
-| --nutui-cascader-bar-color | ` $title-color` |
-| --nutui-cascader-item-padding | ` 10px 20px` |
-| --nutui-cascader-item-color | ` $title-color` |
-| --nutui-cascader-item-font-size | `  $font-size-2` |
-| --nutui-cascader-item-active-color | `  $primary-color` |
+| --nutui-cascader-font-size | `$font-size-2` |
+| --nutui-cascader-line-height | `22px` |
+| --nutui-cascader-title-padding | `24px 20px 17px` |
+| --nutui-cascader-title-font-size | `18px` |
+| --nutui-cascader-title-line-height | `20px` |
+| --nutui-cascader-pane-height | `342px` |
+| --nutui-cascader-tabs-item-padding | `0 10px` |
+| --nutui-cascader-bar-padding | `24px 20px 17px` |
+| --nutui-cascader-bar-font-size | `$font-size-4` |
+| --nutui-cascader-bar-line-height | `20px` |
+| --nutui-cascader-bar-color | `$title-color` |
+| --nutui-cascader-item-height`v1.4.8` | `40px` |
+| --nutui-cascader-item-padding | `10px 20px` |
+| --nutui-cascader-item-margin`v1.4.8` | `0px`|
+| --nutui-cascader-item-border-bottom`v1.4.8` | `0px solid #ddd` |
+| --nutui-cascader-item-color | `$title-color` |
+| --nutui-cascader-item-font-size | `$font-size-2` |
+| --nutui-cascader-item-active-color | `$primary-color` |

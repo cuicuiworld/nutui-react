@@ -3,6 +3,7 @@ import classNames from 'classnames'
 import bem from '@/utils/bem'
 import Icon from '@/packages/icon'
 import { BasicComponent, ComponentDefaults } from '@/utils/typings'
+import TabPane from '@/packages/tabpane'
 
 class Title {
   title = ''
@@ -32,6 +33,7 @@ export interface TabsProps extends BasicComponent {
   animatedTime: number | string
   titleGutter: number | string
   size: TabsSize
+  leftAlign: boolean
   titleNode: () => JSX.Element[]
   onChange: (t: Title) => void
   onClick: (t: Title) => void
@@ -52,12 +54,18 @@ const defaultProps = {
   animatedTime: 300,
   titleGutter: 0,
   size: 'normal',
+  leftAlign: false,
   autoHeight: false,
 } as TabsProps
 const pxCheck = (value: string | number): string => {
   return Number.isNaN(Number(value)) ? String(value) : `${value}px`
 }
-export const Tabs: FunctionComponent<Partial<TabsProps>> = (props) => {
+export const Tabs: FunctionComponent<
+  Partial<TabsProps>
+  // & React.HTMLAttributes<HTMLDivElement>
+> & {
+  TabPane: typeof TabPane
+} = (props) => {
   const {
     value,
     color,
@@ -70,6 +78,7 @@ export const Tabs: FunctionComponent<Partial<TabsProps>> = (props) => {
     animatedTime,
     titleGutter,
     size,
+    leftAlign,
     titleNode,
     children,
     onClick,
@@ -96,10 +105,11 @@ export const Tabs: FunctionComponent<Partial<TabsProps>> = (props) => {
         return null
       }
       const title = new Title()
-      if (child.props?.title || child.props?.paneKey) {
-        title.title = child.props?.title
-        title.paneKey = child.props?.paneKey || idx
-        title.disabled = child.props?.disabled
+      const childProps = child?.props
+      if (childProps?.title || childProps?.paneKey) {
+        title.title = childProps?.title
+        title.paneKey = childProps?.paneKey || idx
+        title.disabled = childProps?.disabled
         title.index = idx
         if (title.paneKey === value) {
           currentIndex = idx
@@ -162,8 +172,11 @@ export const Tabs: FunctionComponent<Partial<TabsProps>> = (props) => {
                   onClick={(e) => tabChange(item, index)}
                   className={classNames(
                     {
-                      active: String(item.paneKey) === String(value),
+                      active:
+                        !item.disabled &&
+                        String(item.paneKey) === String(value),
                       disabled: item.disabled,
+                      'nut-tabs__titles-item-left-align': leftAlign,
                     },
                     `${b('')}__titles-item`
                   )}
@@ -236,3 +249,4 @@ export const Tabs: FunctionComponent<Partial<TabsProps>> = (props) => {
 
 Tabs.defaultProps = defaultProps
 Tabs.displayName = 'NutTabs'
+Tabs.TabPane = TabPane

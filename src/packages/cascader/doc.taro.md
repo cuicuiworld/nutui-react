@@ -432,13 +432,20 @@ export default App;
 ```
 :::
 
-### 自定义选中颜色
+### 自定义样式
 
-传入`activeColor`指定选中的颜色。
+使用configprovider 完成自定义设置。
 :::demo
 ```jsx
 import  React,{useState} from "react";
-import { Cell, Cascader } from '@nutui/nutui-react-taro';
+import { Cell, Cascader, ConfigProvider } from '@nutui/nutui-react-taro';
+
+const customTheme = {
+  nutuiCascaderItemHeight: '48px',
+  nutuiCascaderItemMargin: '0 10px',
+  nutuiCascaderItemPadding: '10px',
+  nutuiCascaderItemBorderBottom: '1px solid #F0F0F0',
+}
 
 const App = () => {
   const [isVisibleDemo6, setIsVisibleDemo6] = useState(false)
@@ -523,18 +530,20 @@ const App = () => {
         setIsVisibleDemo6(true)
       }}
      />
-    <Cascader
-      visible={isVisibleDemo6}
-      color="#008000"
-      tabsColor="#008000"
-      value={value6}
-      title="地址选择"
-      options={optionsDemo6}
-      closeable
-      onClose={()=>{setIsVisibleDemo1(false)}}
-      onChange={change6}
-      onPathChange={onPathChange}
-    />
+    <ConfigProvider theme={customTheme}>
+      <Cascader
+        visible={isVisibleDemo6}
+        color="#3768FA"
+        tabsColor="#3768FA"
+        value={value6}
+        title="地址选择"
+        options={optionsDemo6}
+        closeable
+        onClose={()=>{setIsVisibleDemo1(false)}}
+        onChange={change6}
+        onPathChange={onPathChange}
+      />
+    </ConfigProvider>
     </>
   );
 };
@@ -550,27 +559,28 @@ export default App;
 | ------------- | ---------------------------------------------- | -------- | ------ |
 | value         | 选中值                                          | Array    | -      |
 | options       | 级联数据                                         | Array    | -      |
-| poppable      | 是否弹窗状态展示                                  | Boolean  | true   |
-| visible       | 级联显示隐藏状态                                  | Boolean  | false  |
-| activeColor`1.3.13` | 选中激活颜色                                  | String  | -  |
-| tabsColor`1.3.13` | tabs底部选中激活颜色                                    | String  | -  |
-| lazy          | 是否开启动态加载                                  | Boolean  | false  |
+| poppable      | 是否弹窗状态展示                                  | boolean  | `true`   |
+| visible       | 级联显示隐藏状态                                  | boolean  | `false`  |
+| activeColor`1.3.13` | 选中激活颜色                                  | string  | -  |
+| checkedIcon`1.4.8` | 标记选中的Icon | string | `checklist` |
+| tabsColor`1.3.13` | tabs底部选中激活颜色                                    | string  | -  |
+| lazy          | 是否开启动态加载                                  | boolean  | `false`  |
 | lazyLoad      | 动态加载回调，开启动态加载时生效                   | Function | -      |
-| valueKey      | 自定义`options`结构中`value`的字段               | String   | -      |
-| textKey       | 自定义`options`结构中`text`的字段                | String   | -      |
-| childrenKey   | 自定义`options`结构中`children`的字段            | String   | -      |
+| valueKey      | 自定义`options`结构中`value`的字段               | string   | -      |
+| textKey       | 自定义`options`结构中`text`的字段                | string   | -      |
+| childrenKey   | 自定义`options`结构中`children`的字段            | string   | -      |
 | convertConfig | 当options为可转换为树形结构的扁平结构时，配置转换规则 | Object   | -      |
-| title          | 标题 | String   | ''      |
-| closeIconPosition | 取消按钮位置，继承 Popup 组件 | String   | "top-right"      |
-| close-icon | 自定义关闭按钮，继承 Popup 组件 | String   | "close"     |
-| closeable | 是否显示关闭按钮，继承 Popup 组件 | Boolean   | true     |
+| title          | 标题 | string   | -      |
+| closeIconPosition | 取消按钮位置，继承 Popup 组件 | string   | `top-right`      |
+| close-icon | 自定义关闭按钮，继承 Popup 组件 | string   | `close`     |
+| closeable | 是否显示关闭按钮，继承 Popup 组件 | boolean   | `true`     |
 
 ### Events
 
 | 事件名     | 说明             | 回调参数           |
 | ---------- | ---------------- | ------------------ |
-| onChange     | 选中值改变时触发 | (value, pathNodes) |
-| onPathChange | 选中项改变时触发 | (pathNodes)        |
+| onChange     | 选中值改变时触发 | `value, pathNodes` |
+| onPathChange | 选中项改变时触发 | `pathNodes`        |
 
 
 ## 主题定制
@@ -581,18 +591,21 @@ export default App;
 
 | 名称 | 默认值 |
 | --- | --- |
-| --nutui-cascader-font-size | ` $font-size-2` |
-| --nutui-cascader-line-height | ` 22px` |
-| --nutui-cascader-title-padding | `  24px 20px 17px` |
-| --nutui-cascader-title-font-size | ` 18px` |
-| --nutui-cascader-title-line-height | `  20px` |
-| --nutui-cascader-pane-height | ` 342px` |
-| --nutui-cascader-tabs-item-padding | `  0 10px` |
-| --nutui-cascader-bar-padding | `  24px 20px 17px` |
-| --nutui-cascader-bar-font-size | `  $font-size-4` |
-| --nutui-cascader-bar-line-height | ` 20px` |
-| --nutui-cascader-bar-color | ` $title-color` |
-| --nutui-cascader-item-padding | ` 10px 20px` |
-| --nutui-cascader-item-color | ` $title-color` |
-| --nutui-cascader-item-font-size | `  $font-size-2` |
-| --nutui-cascader-item-active-color | `  $primary-color` |
+| --nutui-cascader-font-size | `$font-size-2` |
+| --nutui-cascader-line-height | `22px` |
+| --nutui-cascader-title-padding | `24px 20px 17px` |
+| --nutui-cascader-title-font-size | `18px` |
+| --nutui-cascader-title-line-height | `20px` |
+| --nutui-cascader-pane-height | `342px` |
+| --nutui-cascader-tabs-item-padding | `0 10px` |
+| --nutui-cascader-bar-padding | `24px 20px 17px` |
+| --nutui-cascader-bar-font-size | `$font-size-4` |
+| --nutui-cascader-bar-line-height | `20px` |
+| --nutui-cascader-bar-color | `$title-color` |
+| --nutui-cascader-item-height`v1.4.8` | `40px` |
+| --nutui-cascader-item-padding | `10px 20px` |
+| --nutui-cascader-item-margin`v1.4.8` | `0px`|
+| --nutui-cascader-item-border-bottom`v1.4.8` | `0px solid #ddd` |
+| --nutui-cascader-item-color | `$title-color` |
+| --nutui-cascader-item-font-size | `$font-size-2` |
+| --nutui-cascader-item-active-color | `$primary-color` |
