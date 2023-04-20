@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
+import { Share, More, Cart2 } from '@nutui/icons-react'
 import { NavBar } from './navbar'
-import { Icon } from '../icon/icon'
 import { Tabs } from '../tabs/tabs'
 import { TabPane } from '../tabpane/tabpane'
 import { useTranslate } from '../../sites/assets/locale'
@@ -66,11 +66,13 @@ const NavBarDemo = () => {
           onClickBack={(e) => alert(translated.a74a1fd4)}
           onClickRight={(e) => alert('icon')}
         >
-          <Icon<{ slot: string }> name="share" slot="right" />
+          <i slot="right">
+            <Share />
+          </i>
         </NavBar>
         <NavBar
           title={translated.e51e4582}
-          desc={translated.cfbdc781}
+          description={translated.cfbdc781}
           leftShow
           onClickTitle={(e) => alert(translated.b840c88f)}
           onClickBack={(e) => alert(translated.a74a1fd4)}
@@ -78,14 +80,18 @@ const NavBarDemo = () => {
         />
         <NavBar
           title={translated.c3a3a1d2}
-          desc={translated['8dab2f66']}
-          titIcon="locationg3"
+          description={translated['8dab2f66']}
           onClickTitle={(e) => alert(translated.b840c88f)}
           onClickRight={(e) => alert(translated['8dab2f66'])}
           onClickBack={(e) => alert(translated.a74a1fd4)}
           onClickIcon={(e) => alert('icon')}
         >
-          <Icon<{ slot: string }> name="more-x" slot="right" />
+          <i slot="titleIcon">
+            <Cart2 />
+          </i>
+          <i slot="right">
+            <More />
+          </i>
         </NavBar>
         <NavBar
           title={translated.c38a08ef}
@@ -96,11 +102,13 @@ const NavBarDemo = () => {
           onClickBack={(e) => alert(translated.a74a1fd4)}
           onClickRight={(e) => alert('icon')}
         >
-          <Icon<{ slot: string }> name="share" slot="right" />
+          <i slot="right">
+            <Share />
+          </i>
         </NavBar>
         <h2>{translated.c9e6df49}</h2>
         <NavBar
-          desc={translated['8dab2f66']}
+          description={translated['8dab2f66']}
           onClickTitle={(e) => alert(translated.b840c88f)}
           onClickRight={(e) => alert(translated['8dab2f66'])}
           onClickBack={(e) => alert(translated.a74a1fd4)}
@@ -118,7 +126,9 @@ const NavBarDemo = () => {
               <TabPane title="Tab 3"> Tab 3 </TabPane>
             </Tabs>
           </div>
-          <Icon<{ slot: string }> name="more-x" slot="right" />
+          <i slot="right">
+            <More />
+          </i>
         </NavBar>
       </div>
     </>

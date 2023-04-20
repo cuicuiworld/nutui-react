@@ -45,7 +45,7 @@ const App = () => {
 
   return ( 
     <>   
-    <Cell isLink onClick={() => setIsVisible1(!isVisible1)}>
+    <Cell  onClick={() => setIsVisible1(!isVisible1)}>
       <span>
         <label>基础用法</label>
       </span>
@@ -92,7 +92,7 @@ const App = () => {
   }
   return ( 
     <>   
-    <Cell isLink onClick={() => setIsVisible2(!isVisible2)}>
+    <Cell  onClick={() => setIsVisible2(!isVisible2)}>
       <span>
         <label>展示取消按钮</label>
       </span>
@@ -101,7 +101,7 @@ const App = () => {
             
     <ActionSheet
       visible={isVisible2}
-      cancelTxt="取消"
+      cancelText="取消"
       menuItems={menuItemsOne}
       onChoose={chooseItemTwo}
       onCancel={() => setIsVisible2(false)}
@@ -141,7 +141,7 @@ const App = () => {
   }
   return ( 
     <>   
-    <Cell isLink onClick={() => setIsVisible3(!isVisible3)}>
+    <Cell  onClick={() => setIsVisible3(!isVisible3)}>
       <span>
         <label>展示描述信息</label>
       </span>
@@ -151,7 +151,7 @@ const App = () => {
       visible={isVisible3}
       title='ActionSheet'
       description="这是一段描述信息"
-      cancelTxt="取消"
+      cancelText="取消"
       menuItems={menuItemsTwo}
       onChoose={chooseItemThree}
       onCancel={() => setIsVisible3(false)}
@@ -183,14 +183,14 @@ const App = () => {
   ]
   return ( 
     <>   
-    <Cell isLink onClick={() => setIsVisible4(!isVisible4)}>
+    <Cell  onClick={() => setIsVisible4(!isVisible4)}>
       <span>
         <label>选项状态</label>
       </span>
     </Cell>
     <ActionSheet
       visible={isVisible4}
-      cancelTxt="取消"
+      cancelText="取消"
       menuItems={menuItemsThree}
       chooseTagValue="着色选项"
       onCancel={() => setIsVisible4(false)}
@@ -211,7 +211,7 @@ export default App;
 | 字段             | 说明                                   | 类型    | 默认值    |
 |------------------|----------------------------------------|---------|-----------|
 | visible       | 遮罩层可见 | boolean | `false`     |
-| cancelTxt       | 取消文案 | string  | `取消`    |
+| cancelText `v2.0.0`      | 取消文案 | string  | `取消`    |
 | menuItems       | 列表项 | Array   | `[]`       |
 | optionTag       | 设置列表项展示使用参数 | string  | `name`    |
 | optionSubTag   | 设置列表项描述展示使用参数 | string  | `subname` |
@@ -225,8 +225,8 @@ export default App;
 
 | 字段   | 说明               | 回调参数                          |
 |--------|--------------------|-----------------------------------|
-| onChoose`v1.3.2` | 选择之后触发       | 选中列表项item, 选中的索引值index |
-| onCancel`v1.3.2` | 点击取消文案时触发 | 无                                |
+| onChoose | 选择之后触发       | 选中列表项item, 选中的索引值index |
+| onCancel | 点击取消文案时触发 | 无                                |
 
 ## 主题定制
 

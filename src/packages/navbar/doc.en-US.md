@@ -19,7 +19,8 @@ import { NavBar } from '@nutui/nutui-react';
 :::demo
 ```tsx
 import React from "react";
-import { NavBar, Icon } from '@nutui/nutui-react';
+import { NavBar } from '@nutui/nutui-react';
+import { Share } from '@nutui/icons-react'
 
 const App = () => {
   return ( 
@@ -32,7 +33,9 @@ const App = () => {
           onClickBack={(e) => alert("title")}
           onClickRight={(e) => alert('icon')}
         >
-          <Icon name="share" slot="right" />
+           <i slot="right">
+            <Share />
+          </i>
         </NavBar>
     </>
   );
@@ -52,7 +55,7 @@ const App = () => {
     <>   
       <NavBar
           title="Browsing history"
-          desc="clear"
+          description="clear"
           leftShow
           onClickTitle={(e) => alert("back")}
           onClickBack={(e) => alert("title")}
@@ -69,21 +72,26 @@ export default App;
 :::demo
 ```tsx
 import  React from "react";
-import { NavBar, Icon } from '@nutui/nutui-react';
+import { NavBar } from '@nutui/nutui-react';
+import { Cart2, More } from '@nutui/icons-react'
 
 const App = () => {
   return ( 
     <>   
       <NavBar
           title="cart"
-          desc="edit"
-          titIcon="locationg3"
+          description="edit"
           onClickTitle={(e) => alert("back")}
           onClickBack={(e) => alert("title")}
           onClickRight={(e) => alert('edit')}
           onClickIcon={(e) => alert('icon')}
         >
-          <Icon name="more-x" slot="right" />
+          <i slot="titleIcon">
+            <Cart2 />
+          </i>
+          <i slot="right">
+            <More />
+          </i>
       </NavBar>
     </>
   );
@@ -96,7 +104,8 @@ export default App;
 :::demo
 ```tsx
 import  React from "react";
-import { NavBar, Icon } from '@nutui/nutui-react';
+import { NavBar } from '@nutui/nutui-react';
+import { Share } from '@nutui/icons-react'
 
 const App = () => {
   return ( 
@@ -110,7 +119,9 @@ const App = () => {
           onClickBack={(e) => alert("title")}
           onClickRight={(e) => alert('icon')}
         >
-          <Icon name="share" slot="right" />
+           <i slot="right">
+            <Share />
+          </i>
       </NavBar>
     </>
   );
@@ -126,14 +137,15 @@ export default App;
 :::demo
 ```tsx
 import  React, { useState } from "react";
-import { NavBar, Icon, Tabs, TabPane } from '@nutui/nutui-react';
+import { NavBar, Tabs, TabPane } from '@nutui/nutui-react';
+import { More } from '@nutui/icons-react'
 
 const App = () => {
   const [tab1value, setTab1value] = useState('Tab 1')
   return ( 
     <>   
       <NavBar
-          desc="edit"
+          description="edit"
           onClickTitle={(e) => alert("title")}
           onClickRight={(e) => alert("edit")}
           onClickBack={(e) => alert("back")}
@@ -146,7 +158,9 @@ const App = () => {
               <TabPane title="Tab 3"> Tab 3 </TabPane>
             </Tabs>
           </div>
-          <Icon name="more-x" slot="right" />
+          <i slot="right">
+            <More />
+          </i>
       </NavBar>
     </>
   );
@@ -161,9 +175,9 @@ export default App;
 | Prop            | Description                                                                                           | Type    | Default  |
 |-----------------|------------------------------------------------------------------------------------------------|---------|---------|
 | title           | title name                                                                                       | string  | -       |
-| desc            | Description on the right                                                                                       | string  | -       |
+| description            | Description on the right                                                                                       | string  | -       |
 | leftShow        | Whether to show the left arrow                                                                              | boolean | `true`   |
-| titIcon         | title with icon                                                         | string  | -       |   
+| titIcon`v2.0.0 废弃`         | title with icon                                                         | string  | -       |   
 | leftText         | copy on the left                                                         | string  | -       |   
 | fixed         | Is it fixed                                                         | boolean  | `false`       |   
 | safeAreaInsetTop         | Whether it is suitable for the safe area                                                         | boolean  | `false`       |   

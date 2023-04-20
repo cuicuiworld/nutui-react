@@ -75,7 +75,7 @@ test('should not render overlay when overlay prop is false', () => {
 test('prop close-on-click-overlay test', async () => {
   const { container } = render(
     <>
-      <Popup visible closeOnClickOverlay={false} />
+      <Popup visible closeOnOverlayClick={false} />
     </>
   )
   fireEvent.click(container)
@@ -138,7 +138,7 @@ test('should render close icon when using closeable prop', () => {
 test('should render correct close icon when using close-icon prop', () => {
   const { container } = render(
     <>
-      <Popup visible closeable closeIcon="success" />
+      <Popup visible closeable />
     </>
   )
 
@@ -171,7 +171,7 @@ test('should allow to using teleport prop', () => {
 test('event click test', async () => {
   const { container } = render(
     <>
-      <Popup visible closeOnClickOverlay />
+      <Popup visible closeOnOverlayClick />
     </>
   )
   const overlay = container.querySelector('.nut-overlay') as Element

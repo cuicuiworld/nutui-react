@@ -1,8 +1,8 @@
 import React, { FunctionComponent, useEffect, useRef, useState } from 'react'
 import { getEnv } from '@tarojs/taro'
+import { CircleClose, Search } from '@nutui/icons-react-taro'
 import bem from '@/utils/bem'
 import { useConfig } from '@/packages/configprovider/configprovider.taro'
-import Icon from '@/packages/icon/index.taro'
 import { BasicComponent, ComponentDefaults } from '@/utils/typings'
 
 type TIconDirection = 'in-left' | 'out-left' | 'in-right' | 'out-right'
@@ -22,7 +22,7 @@ export interface SearchBarProps extends BasicComponent {
   maxLength?: number
   /** 是否启用清除图标，点击清除图标后会清空输入框	 */
   clearable?: boolean
-  clearIconSize?: string | number
+  clearSize?: string | number
   /** 搜索框外部背景色	 */
   background?: string
   /** 搜索框背景色	 */
@@ -76,12 +76,12 @@ const defaultProps = {
   disabled: false,
   maxLength: 9999,
   clearable: true,
-  clearIconSize: '12px',
+  clearSize: '12px',
   align: 'left',
   readonly: true,
   autoFocus: false,
   label: '',
-  leftinIcon: <Icon name="search" size="12" />,
+  leftinIcon: <Search size="12" />,
 } as SearchBarProps
 export const SearchBar: FunctionComponent<
   Partial<SearchBarProps> &
@@ -103,7 +103,7 @@ export const SearchBar: FunctionComponent<
     disabled,
     maxLength,
     clearable,
-    clearIconSize,
+    clearSize,
     align,
     readOnly,
     autoFocus,
@@ -124,8 +124,6 @@ export const SearchBar: FunctionComponent<
     onClickLeftoutIcon,
     onClickRightinIcon,
     onClickRightoutIcon,
-    iconClassPrefix,
-    iconFontClassName,
   } = {
     ...defaultProps,
     ...props,
@@ -133,10 +131,16 @@ export const SearchBar: FunctionComponent<
 
   const alignClass = `${align}`
 
+  const forceFocus = () => {
+    const searchSelf: HTMLInputElement | null = searchRef.current
+    searchSelf && searchSelf.focus()
+  }
+
   const change = (event: Event) => {
     const { value } = event.target as any
     onChange && onChange?.(value, event)
     setValue(value)
+    value === '' && forceFocus()
   }
   const focus = (event: Event) => {
     const { value } = event.target as any
@@ -154,10 +158,7 @@ export const SearchBar: FunctionComponent<
   }, [props.value])
 
   useEffect(() => {
-    if (autoFocus) {
-      const searchSelf: HTMLInputElement | null = searchRef.current
-      searchSelf && searchSelf.focus()
-    }
+    autoFocus && forceFocus()
   }, [autoFocus])
 
   const renderField = () => {
@@ -252,13 +253,7 @@ export const SearchBar: FunctionComponent<
         className={`${searchbarBem('clear')} ${rightinIcon ? 'pos-right' : ''}`}
         onClick={(e: any) => clearaVal(e)}
       >
-        <Icon
-          classPrefix={iconClassPrefix}
-          fontClassName={iconFontClassName}
-          name="circle-close"
-          size={clearIconSize}
-          color="#555"
-        />
+        <CircleClose size={clearSize} color="#555" />
       </div>
     )
   }
@@ -269,6 +264,7 @@ export const SearchBar: FunctionComponent<
     }
     setValue('')
     onClear && onClear(event)
+    forceFocus()
   }
 
   const renderRightLabel = () => {

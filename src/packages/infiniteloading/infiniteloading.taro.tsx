@@ -1,9 +1,14 @@
-import React, { useState, useEffect, useRef, FunctionComponent } from 'react'
+import React, {
+  useState,
+  useEffect,
+  useRef,
+  FunctionComponent,
+  ReactNode,
+} from 'react'
 import classNames from 'classnames'
 import { ScrollView } from '@tarojs/components'
 import { createSelectorQuery } from '@tarojs/taro'
 import bem from '@/utils/bem'
-import Icon from '@/packages/icon/index.taro'
 import { useConfig } from '@/packages/configprovider/configprovider.taro'
 import { BasicComponent, ComponentDefaults } from '@/utils/typings'
 
@@ -12,11 +17,11 @@ export interface InfiniteloadingProps extends BasicComponent {
   upperThreshold: number
   containerId: string
   isOpenRefresh: boolean
-  pullIcon: string
-  pullTxt: string
-  loadIcon: string
-  loadTxt: string
-  loadMoreTxt: string
+  pullIcon: ReactNode
+  pullText: string
+  loadIcon: ReactNode
+  loadingText: string
+  loadMoreText: string
   className: string
   style: React.CSSProperties
   onRefresh: (param: () => void) => void
@@ -32,11 +37,11 @@ const defaultProps = {
   isOpenRefresh: false,
   pullIcon:
     'https://img10.360buyimg.com/imagetools/jfs/t1/169863/6/4565/6306/60125948E7e92774e/40b3a0cf42852bcb.png',
-  pullTxt: '松开刷新',
+  pullText: '松开刷新',
   loadIcon:
     'https://img10.360buyimg.com/imagetools/jfs/t1/169863/6/4565/6306/60125948E7e92774e/40b3a0cf42852bcb.png',
-  loadTxt: '加载中···',
-  loadMoreTxt: '哎呀，这里是底部了啦',
+  loadingText: '加载中···',
+  loadMoreText: '哎呀，这里是底部了啦',
 } as InfiniteloadingProps
 
 interface BaseTouchEvent<TouchDetail> {
@@ -48,7 +53,7 @@ interface BaseTouchEvent<TouchDetail> {
 
   preventDefault: any
 }
-interface ITouchEvent extends BaseTouchEvent<any> {}
+type ITouchEvent = BaseTouchEvent<any>
 
 export const Infiniteloading: FunctionComponent<
   Partial<InfiniteloadingProps> & React.HTMLAttributes<HTMLDivElement>
@@ -61,16 +66,14 @@ export const Infiniteloading: FunctionComponent<
     containerId,
     isOpenRefresh,
     pullIcon,
-    pullTxt,
+    pullText,
     loadIcon,
-    loadTxt,
-    loadMoreTxt,
+    loadingText,
+    loadMoreText,
     className,
     onRefresh,
     onLoadMore,
     onScrollChange,
-    iconClassPrefix,
-    iconFontClassName,
   } = {
     ...defaultProps,
     ...props,
@@ -100,7 +103,7 @@ export const Infiniteloading: FunctionComponent<
   const getScrollHeight = () => {
     const parentElement = getParentElement('scroller')
     parentElement
-      .boundingClientRect((rect) => {
+      .boundingClientRect((rect: any) => {
         scrollHeight.current = rect.height
       })
       .exec()
@@ -194,6 +197,7 @@ export const Infiniteloading: FunctionComponent<
       className={classes}
       scrollY
       id="scroller"
+      type="list"
       style={{ height: '100%' }}
       onScroll={scrollAction}
       onScrollToLower={lower}
@@ -203,14 +207,9 @@ export const Infiniteloading: FunctionComponent<
     >
       <div className="nut-infinite-top" ref={refreshTop} style={getStyle()}>
         <div className="top-box">
-          <Icon
-            classPrefix={iconClassPrefix}
-            fontClassName={iconFontClassName}
-            className="top-img"
-            name={pullIcon}
-          />
+          {pullIcon && <>{pullIcon}</>}
           <span className="top-text">
-            {pullTxt || locale.infiniteloading.pullRefreshText}
+            {pullText || locale.infiniteloading.pullRefreshText}
           </span>
         </div>
       </div>
@@ -218,20 +217,15 @@ export const Infiniteloading: FunctionComponent<
       <div className="nut-infinite-bottom">
         {isInfiniting ? (
           <div className="bottom-box">
-            <Icon
-              classPrefix={iconClassPrefix}
-              fontClassName={iconFontClassName}
-              className="bottom-img"
-              name={loadIcon}
-            />
+            {loadIcon && <>{loadIcon}</>}
             <div className="bottom-text">
-              {loadTxt || locale.infiniteloading.loadText}
+              {loadingText || locale.infiniteloading.loadText}
             </div>
           </div>
         ) : (
           !hasMore && (
             <div className="tips">
-              {loadMoreTxt || locale.infiniteloading.loadMoreText}
+              {loadMoreText || locale.infiniteloading.loadMoreText}
             </div>
           )
         )}

@@ -1,8 +1,9 @@
 import React from 'react'
-import { BackTop, Icon } from '@/packages/nutui.react.taro'
+import Taro from '@tarojs/taro'
+import { Top } from '@nutui/icons-react-taro'
+import { BackTop } from '@/packages/nutui.react.taro'
 import { useTranslate } from '@/sites/assets/locale/taro'
 import Header from '@/sites/components/header'
-import Taro from '@tarojs/taro'
 
 interface T {
   title: string
@@ -51,7 +52,7 @@ const BackTopDemo = () => {
       <div
         className={`demo ${Taro.getEnv() === 'WEB' ? 'web' : ''}`}
         style={demoStyle}
-        id="elId"
+        id="target"
       >
         <h2>{translated.title}</h2>
         <div className="text-data" style={cellStyle}>
@@ -128,9 +129,11 @@ const BackTopDemo = () => {
         </div>
         <BackTop
           className="custom-class"
-          elId="elId"
-          distance={100}
-          bottom={110}
+          threshold={200}
+          style={{
+            bottom: '50px',
+            right: '20px',
+          }}
           onClick={handleClick}
         >
           <div
@@ -141,11 +144,10 @@ const BackTopDemo = () => {
               alignItems: 'center',
             }}
           >
-            <Icon size="12px" className="nut-backtop-main" name="top" />
+            <Top width={12} height={12} />
             <div style={{ fontSize: '12px' }}>{translated.backText}</div>
           </div>
         </BackTop>
-        <BackTop elId="elId" distance={200} bottom={50} onClick={handleClick} />
       </div>
     </>
   )

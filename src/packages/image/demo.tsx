@@ -1,9 +1,9 @@
 import React from 'react'
+import { CircleClose, Loading } from '@nutui/icons-react'
 import { Image } from './image'
 import { useTranslate } from '../../sites/assets/locale'
 import Row from '@/packages/row'
 import Col from '@/packages/col'
-import Icon from '@/packages/icon'
 import Cell from '@/packages/cell'
 
 const ImageDemo = () => {
@@ -32,9 +32,15 @@ const ImageDemo = () => {
     },
   })
   const src =
-    'https://img10.360buyimg.com/ling/jfs/t1/181258/24/10385/53029/60d04978Ef21f2d42/92baeb21f907cd24.jpg'
-  const placeholderImg =
-    'https://img12.360buyimg.com/imagetools/jfs/t1/180776/26/8319/4587/60c094a8E1ef2ec9d/940780b87700b1d3.png'
+    'https://storage.360buyimg.com/imgtools/e067cd5b69-07c864c0-dd02-11ed-8b2c-d7f58b17086a.png'
+  const placeholderImg = (
+    <img
+      alt=""
+      width="100%"
+      height="150px"
+      src="https://img12.360buyimg.com/imagetools/jfs/t1/180776/26/8319/4587/60c094a8E1ef2ec9d/940780b87700b1d3.png"
+    />
+  )
 
   const fits = ['contain', 'cover', 'fill', 'none', 'scale-down']
   const position1 = ['left', 'center', 'right']
@@ -63,8 +69,7 @@ const ImageDemo = () => {
         <Cell>
           <Image
             src={src}
-            width="100"
-            height="100"
+            width="100%"
             onClick={() => {
               console.log('click image')
             }}
@@ -125,11 +130,23 @@ const ImageDemo = () => {
         <Cell>
           <Row gutter={10}>
             <Col span="8">
-              <Image src={src} width="100" height="100" fit="contain" round />
+              <Image
+                src={src}
+                width="100"
+                height="100"
+                fit="contain"
+                radius="50%"
+              />
               <div className="image-text">contain</div>
             </Col>
             <Col span="8">
-              <Image src={src} width="100" height="100" fit="cover" round />
+              <Image
+                src={src}
+                width="100"
+                height="100"
+                fit="cover"
+                radius="50%"
+              />
               <div className="image-text">cover</div>
             </Col>
             <Col span="8">
@@ -139,7 +156,6 @@ const ImageDemo = () => {
                 height="100"
                 fit="cover"
                 radius="10"
-                round
               />
               <div className="image-text">cover</div>
             </Col>
@@ -153,8 +169,7 @@ const ImageDemo = () => {
               <Image
                 width="100"
                 height="100"
-                showLoading
-                isLazy
+                lazy
                 onLoad={() => {
                   console.log('image onload')
                 }}
@@ -165,12 +180,8 @@ const ImageDemo = () => {
               <Image
                 width="100"
                 height="100"
-                isLazy
-                slotLoding={
-                  <>
-                    <Icon name="loading" />
-                  </>
-                }
+                lazy
+                loading={<Loading className="nut-icon-loading" />}
               />
               <div className="image-text">{translated.custom}</div>
             </Col>
@@ -185,7 +196,6 @@ const ImageDemo = () => {
                 src="https://x"
                 width="100"
                 height="100"
-                showError
                 onError={() => {
                   console.log('image error')
                 }}
@@ -193,9 +203,12 @@ const ImageDemo = () => {
               <div className="image-text">{translated.default}</div>
             </Col>
             <Col span="8">
-              <Image src="https://x" width="100" height="100" showError>
-                <Icon name="circle-close" />
-              </Image>
+              <Image
+                src="https://x"
+                width="100"
+                height="100"
+                error={<CircleClose />}
+              />
               <div className="image-text">{translated.custom}</div>
             </Col>
           </Row>
@@ -209,11 +222,9 @@ const ImageDemo = () => {
                   key={item}
                   height="150"
                   src={src}
-                  isLazy
-                  showError
-                  showLoading
-                  loadingImg={placeholderImg}
-                  errorImg={placeholderImg}
+                  lazy
+                  loading={placeholderImg}
+                  error={placeholderImg}
                 />
               )
             })}

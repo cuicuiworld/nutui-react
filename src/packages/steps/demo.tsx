@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Service, People, Location2 } from '@nutui/icons-react'
 import { useTranslate } from '../../sites/assets/locale'
 import { Steps } from './steps'
 import Button from '@/packages/button'
@@ -147,7 +148,10 @@ const StepsDemo = () => {
       <div className="demo padding">
         <h2>{translated['74fc5d8a']}</h2>
         <div className="steps-wrapper">
-          <Steps current={stepState.current1} onClickStep={handleClickStep}>
+          <Steps
+            current={stepState.current1}
+            onClickStep={() => handleStep('current2')}
+          >
             <Step activeIndex={1} title={translated['606ae3f5']}>
               1
             </Step>
@@ -225,7 +229,10 @@ const StepsDemo = () => {
         <h2>{translated['0533b454']}</h2>
         <div className="steps-wrapper">
           <ConfigProvider theme={customTheme}>
-            <Steps current={stepState.current2}>
+            <Steps
+              current={stepState.current2}
+              onClickStep={() => handleStep('current2')}
+            >
               <Step
                 activeIndex={1}
                 title={translated['606ae3f5']}
@@ -282,13 +289,25 @@ const StepsDemo = () => {
         <h2>{translated['70ffa5d8']}</h2>
         <div className="steps-wrapper">
           <Steps current={1}>
-            <Step activeIndex={1} title={translated.f28461bb} icon="service">
+            <Step
+              activeIndex={1}
+              title={translated.f28461bb}
+              icon={<Service width={12} height={12} />}
+            >
               1
             </Step>
-            <Step activeIndex={2} title={translated.dc9591e5} icon="people">
+            <Step
+              activeIndex={2}
+              title={translated.dc9591e5}
+              icon={<People width={12} height={12} />}
+            >
               2
             </Step>
-            <Step activeIndex={3} title={translated.f6e0d691} icon="location2">
+            <Step
+              activeIndex={3}
+              title={translated.f6e0d691}
+              icon={<Location2 width={12} height={12} />}
+            >
               3
             </Step>
           </Steps>

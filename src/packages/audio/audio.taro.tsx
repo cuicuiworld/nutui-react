@@ -6,7 +6,7 @@ import React, {
 } from 'react'
 
 import { createInnerAudioContext, InnerAudioContext } from '@tarojs/taro'
-import Icon from '@/packages/icon/index.taro'
+import { Service } from '@nutui/icons-react-taro'
 import Range from '@/packages/range/index.taro'
 import Button from '@/packages/button/index.taro'
 import bem from '@/utils/bem'
@@ -178,20 +178,7 @@ export const Audio: FunctionComponent<
             }`}
             onClick={handleStatusChange}
           >
-            {playing ? (
-              <Icon
-                classPrefix={iconClassPrefix}
-                fontClassName={iconFontClassName}
-                name="service"
-                className="nut-icon-loading"
-              />
-            ) : (
-              <Icon
-                classPrefix={iconClassPrefix}
-                fontClassName={iconFontClassName}
-                name="service"
-              />
-            )}
+            <Service className={playing ? 'nut-icon-loading' : ''} />
           </div>
         </div>
       </>

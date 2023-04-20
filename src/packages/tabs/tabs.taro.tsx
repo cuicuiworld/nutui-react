@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useEffect, useRef, useState } from 'react'
 import classNames from 'classnames'
+import { JoySmile } from '@nutui/icons-react-taro'
 import bem from '@/utils/bem'
-import Icon from '@/packages/icon/index.taro'
 import { BasicComponent, ComponentDefaults } from '@/utils/typings'
 import TabPane from '@/packages/tabpane/index.taro'
 
@@ -85,8 +85,6 @@ export const Tabs: FunctionComponent<
     onChange,
     className,
     autoHeight,
-    iconClassPrefix,
-    iconFontClassName,
     ...rest
   } = {
     ...defaultProps,
@@ -108,7 +106,7 @@ export const Tabs: FunctionComponent<
       const childProps = child?.props
       if (childProps?.title || childProps?.paneKey) {
         title.title = childProps?.title
-        title.paneKey = childProps?.paneKey || idx
+        title.paneKey = getPaneKey(childProps?.paneKey, idx)
         title.disabled = childProps?.disabled
         title.index = idx
         if (title.paneKey === value) {
@@ -149,6 +147,10 @@ export const Tabs: FunctionComponent<
         ? `translate3d(-${index * 100}%, 0, 0)`
         : `translate3d( 0,-${index * 100}%, 0)`,
     transitionDuration: `${animatedTime}ms`,
+  }
+
+  const getPaneKey = (paneKey: string | number, index: number) => {
+    return typeof paneKey === 'string' ? paneKey : String(paneKey || index)
   }
 
   const tabChange = (item: Title, index: number) => {
@@ -193,12 +195,7 @@ export const Tabs: FunctionComponent<
                       className={`${b('')}__titles-item__smile`}
                       style={tabsActiveStyle}
                     >
-                      <Icon
-                        classPrefix={iconClassPrefix}
-                        fontClassName={iconFontClassName}
-                        color={color}
-                        name="joy-smile"
-                      />
+                      <JoySmile color={color} />
                     </div>
                   )}
                   <div
@@ -231,7 +228,7 @@ export const Tabs: FunctionComponent<
             }
 
             if (
-              String(value) !== String(child.props?.paneKey || idx) &&
+              String(value) !== getPaneKey(child.props?.paneKey, idx) &&
               autoHeight
             ) {
               childProps = {

@@ -178,20 +178,25 @@ const SwipeDemo = () => {
           onTouchMove={(event) => console.log('touch Move', event)}
           onTouchEnd={(event) => console.log('touch End', event)}
         >
-          <Cell title={translated.leftDel} roundRadius={0} />
+          <Cell title={translated.leftDel} radius={0} />
         </Swipe>
         <h2>{translated.title6}</h2>
         <Swipe
           ref={openRef}
           rightAction={
-            <Button shape="square" type="danger">
+            <Button shape="square" type="primary">
               {translated.del}
             </Button>
           }
+          style={{ marginBottom: '10px' }}
         >
-          <Cell title={translated.openOrClose} roundRadius={0} />
+          <Cell title={translated.openOrClose} radius={0} />
         </Swipe>
-        <Button onClick={() => (openRef.current as any)?.open()}>
+        <Button
+          style={{ marginRight: '10px' }}
+          type="primary"
+          onClick={() => (openRef.current as any)?.open()}
+        >
           {translated.open}
         </Button>
         <Button onClick={() => (openRef.current as any)?.close()}>
@@ -201,7 +206,7 @@ const SwipeDemo = () => {
         <Swipe
           ref={closeRef}
           rightAction={
-            <Button shape="square" type="danger">
+            <Button shape="square" type="primary">
               {translated.del}
             </Button>
           }
@@ -209,29 +214,29 @@ const SwipeDemo = () => {
             ;(closeRef.current as any)?.close()
           }}
         >
-          <Cell title={translated.closeLeft} roundRadius={0} />
+          <Cell title={translated.closeLeft} radius={0} />
         </Swipe>
         <h2>{translated.title2}</h2>
         <Swipe
           rightAction={
-            <Button shape="square" type="danger">
+            <Button shape="square" type="primary">
               {translated.del}
             </Button>
           }
           disabled
         >
-          <Cell title={translated.disabled} roundRadius={0} />
+          <Cell title={translated.disabled} radius={0} />
         </Swipe>
         <h2>{translated.title3}</h2>
         <Swipe
           leftAction={
-            <Button shape="square" type="success">
+            <Button shape="square" type="primary">
               {translated.choose}
             </Button>
           }
           rightAction={
             <>
-              <Button shape="square" type="danger">
+              <Button shape="square" type="primary">
                 {translated.del}
               </Button>
               <Button shape="square" type="info">
@@ -270,11 +275,12 @@ const SwipeDemo = () => {
         <Swipe
           rightAction={
             <>
-              <Button shape="square" type="danger">
+              <Button shape="square" type="primary">
                 {translated.cart}
               </Button>
             </>
           }
+          style={{ marginBottom: '30px' }}
         >
           <Cell>
             <div

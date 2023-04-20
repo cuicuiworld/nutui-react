@@ -1,5 +1,3 @@
-@import '../icon/icon.scss';
-
 .nut-theme-dark {
   .nut-navbar {
     background: $dark5;
@@ -125,8 +123,8 @@
       display: inline;
     }
 
-    &-desc {
-      font-size: $cell-title-desc-font;
+    &-description {
+      font-size: $cell-description-font-size;
     }
 
     .text__title {
@@ -151,7 +149,7 @@
   }
 
   &__left {
-    font-size: $cell-desc-font;
+    font-size: $cell-extra-font-size;
     color: $gray2;
     position: absolute;
     left: 0;
@@ -164,7 +162,7 @@
   }
 
   &__right {
-    font-size: $cell-desc-font;
+    font-size: $cell-extra-font-size;
     color: $gray2;
     position: absolute;
     right: 0;

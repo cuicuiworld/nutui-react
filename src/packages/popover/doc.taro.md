@@ -57,15 +57,16 @@ export default App;
 :::demo
 ```tsx
 import  React, { useState, useRef  } from "react";
-import { Popover,Button,Icon } from '@nutui/nutui-react-taro';
+import { Popover,Button } from '@nutui/nutui-react-taro';
+import { My2, Cart2, Location2 } from '@nutui/icons-react-taro'
 
 const App = () => {
   const [showIcon, setShowIcon] = useState(false)
   const [disableAction, setDisableAction] = useState(false)
   const iconItemList= [
-    {name: 'option1',icon: 'my2'},
-    {name: 'option2',icon: 'cart2'},
-    {name: 'option3',icon: 'location2'}
+    {name: 'option1',icon: <My2/>},
+    {name: 'option2',icon: <Cart2/>},
+    {name: 'option3',icon: <Location2/>}
   ];
   const itemListDisabled=[
     {name: 'option1',disabled: true},
@@ -99,57 +100,63 @@ export default App;
 ### 自定义内容
 
 :::demo
+
 ```tsx
-import  React, { useState, useRef  } from "react";
-import { Popover,Button, Icon } from '@nutui/nutui-react-taro';
+import React, { useState, useRef } from "react";
+import { Popover, Button } from '@nutui/nutui-react-taro';
+import { Service, Notice, Location, Category, Scan2, Message} from "@nutui/icons-react-taro";
 
 const App = () => {
   const [customized, setCustomized] = useState(false)
-  const selfContent= [
+  const selfContent = [
     {
-      name: 'service',
-      desc: 'option1'
+      name: <Service size={15}/>,
+      description: 'option1'
     },
     {
-      name: 'notice',
-      desc: 'option2'
+      name: <Notice  size={15}/>,
+      description: 'option2'
     },
     {
-      name: 'location',
-      desc: 'option3'
+      name: <Location size={15}/>,
+      description: 'option3'
     },
     {
-      name: 'category',
-      desc: 'option4'
+      name: <Category size={15}/>,
+      description: 'option4'
     },
     {
-      name: 'scan2',
-      desc: 'option5'
+      name: <Scan2 size={15}/>,
+      description: 'option5'
     },
     {
-      name: 'message',
-      desc: 'option6'
+      name: <Message size={15}/>,
+      description: 'option6'
     }
   ];
 
   return (
     <>
-      <Popover 
-        visible={customized} 
-        onClick={()=>{customized ? setCustomized(false) : setCustomized(true)}}>
+      <Popover
+        visible={customized}
+        onClick={() => {
+          customized ? setCustomized(false) : setCustomized(true)
+        }}>
         <Button type="primary" shape="square">自定义内容</Button>
         {
-          customized ? 
-          <div className="self-content" style={selfContentStyle}>
-          {
-            selfContent.map((item: any)=>{
-              return <div className="self-content-item" style={selfContentItem} key={item.name}>
-                <Icon name={item.name} size="15" />
-                <div className="self-content-desc" style={selfContentDesc}>{ item.desc }</div>
-              </div>
-            })
-          }
-        </div> : ''
+          customized ?
+            <div className="self-content" style={selfContentStyle}>
+              {
+                selfContent.map((item: any) => {
+                  return <div className="self-content-item"
+                              style={selfContentItem} key={item.name}>
+                    {item.name}
+                    <div className="self-content-description"
+                         style={selfContentDesc}>{item.description}</div>
+                  </div>
+                })
+              }
+        </div> : null
         }
       </Popover>
     </>
@@ -169,7 +176,7 @@ left          # 左侧中间位置
 right         # 右侧中间位置
 bottom        # 底部中间位置
 ```
-自 `v1.3.0` 起新增
+自  起新增
 ```
 top-start     # 顶部左侧位置
 top-end       # 顶部右侧位置 
@@ -224,7 +231,7 @@ export default App;
 | visible      | 是否展示气泡弹出层                 | boolean  | `false`     |
 | theme          | 主题风格，可选值为 dark            | string   | `light`   |
 | location       | 弹出位置  | string   | `bottom`  |
-| offset `v1.3.0`       | 出现位置的偏移量  | number   | `20`  |
+| offset        | 出现位置的偏移量  | number   | `20`  |
 
 ### List 数据结构  
 

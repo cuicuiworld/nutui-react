@@ -1,3 +1,50 @@
+# v1.4.13
+`2023-03-29`
+
+* :bug: fix(dialog): 修复Dialog.confirm弹框关闭后dom没有移除问题 (#851) @拧巴的猫
+* :bug: fix(Elevator): 组件瘦身+taro h5适配 (#858) @拧巴的猫
+* :bug: fix(picker): 修复taro版本滚动报错问题 (#852) @拧巴的猫
+* :bug: fix(range): 修复 a11y 属性并补全组件的单元测试 (#849) @AnteeHub
+* :bug: fix: taro-v3.6.12 complier @junjun666
+* :bug: fix: 修复input 的errorMessage显隐导致input失焦问题 (#827) @Penguin-Lin
+* 📖 docs: imagepreview 组件增加点击缩略图切换示例 (#854) @oasis-cloud
+
+
+# v1.4.12
+`2023-03-22`
+
+* :sparkles: feat: 文档Demo示例touch兼容 (#830) @Song
+* :bug: fix(calendar): 修复自定义 title 失效问题 (#839) @eiinu
+* :bug: fix: ellipsis 组件动态设置内容无效问题 (#823) @刘正午
+* :bug: fix: picker 组件在小程序端触发滚动后，页面(有滚动条的情况下)也一起滚动 (#829) @xianyu
+* :bug: fix: tag 组件动态切换 className 不生效 (#820) @刘正午
+* :bug: fix: 修复 button 组件的样式通过最外层标签设置 (#840) @oasis-cloud
+* :bug: fix: 修复 calendar 组件中当 defaultValue 为空时,如果月份列表包含当月,则默认定位到当月 (#813) @刘正午
+* :bug: fix: 修改 input 文档示例代码change 改为 onChange (#832) @Song
+* :bug: fix: 修复cell文案左右相互挤压和长字符不换行的问题 (#836) @junjun666
+* :bug: fix: 添加项目依赖 #802 (#816) @eiinu
+* :bug: fix: 修复下拉刷新报错 #761 (#817) @eiinu
+* :bug: fix：Form提交数据中缺少默认选中的radio值 (#834) @junjun666
+* 🔨 chore: 移除 node engines (#843) @oasis-cloud
+* 📖 docs: 更新 README.md (#838) @AnteeHub
+
+
+# v1.4.11
+`2023-03-15`
+
+* :sparkles: feat(datepicker): 新增支持时分类型选择&同步增加demo&taro文档国际化 (#782) @irisSong
+* :sparkles: feat: calendar新增onYearMonthChange属性 (#807) @midday
+* :sparkles: feat: 修复 taro 版本日历默认滚动到相应区域和首页白屏问题 (#805) @midday
+* :sparkles: feat: 表格支持隐藏表头属性 (#796) @midday
+* :bug: fix: ellipsis 在深层嵌套中无法获取元素信息 (#798) @oasis-cloud
+* :bug: fix: fix-col-offset (#783) @Penguin-Lin
+* :bug: fix: notify 组件设置 position 之后位置错误 (#803) @oasis-cloud
+* :bug: fix: radiogroup 中使用 button 类型的 radio 样式不对 (#801) @oasis-cloud
+* :bug: fix: textarea 优化中文输入 (#797) @oasis-cloud
+* :bug: fix: 修复 SearchBar 清空内容时失去焦点的问题 @midday
+* :bug: fix: 修改 textarea 的 padding 为之前版本的值 (#800) @oasis-cloud
+* 🔨 chore(shortpassword): 删除不必要的 log 信息 (#780) @AnteeHub
+
 # v1.4.10
 `2023-03-08`
 

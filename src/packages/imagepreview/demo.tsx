@@ -9,6 +9,7 @@ interface T {
   withInitNo: string
   withPagination: string
   withVideos: string
+  thumb: string
 }
 
 const images = [
@@ -57,6 +58,7 @@ const ImagePreviewDemo = () => {
       withInitNo: '设置初始页码',
       withPagination: '设置轮播指示器及颜色',
       withVideos: '视频、图片预览',
+      thumb: '点击缩略图切换',
     },
     'en-US': {
       basic: 'Basic usage',
@@ -64,6 +66,7 @@ const ImagePreviewDemo = () => {
       withInitNo: 'With Init No',
       withPagination: 'With Pagination',
       withVideos: 'With Videos',
+      thumb: 'Click image to switch',
     },
   })
 
@@ -103,21 +106,45 @@ const ImagePreviewDemo = () => {
   const hideFn4 = () => {
     setShowPreview4(false)
   }
-
+  const [init, setInit] = useState<any>(0)
   return (
     <>
       <div className="demo">
         <h2>{translated.basic}</h2>
         <ImagePreview images={images} show={showPreview1} onClose={hideFn1} />
-        <Cell title={translated.showPreview} isLink onClick={showFn1} />
+        <Cell title={translated.showPreview} onClick={showFn1} />
+        <h2>{translated.thumb}</h2>
+        <Cell style={{ position: 'relative', zIndex: 10000 }}>
+          {images.map((image, index) => (
+            <span
+              key={image.src}
+              onClick={() => setInit(index + 1)}
+              style={{ marginRight: '10px' }}
+            >
+              <img width={30} height={30} src={image.src} alt={image.src} />
+            </span>
+          ))}
+        </Cell>
+        <ImagePreview
+          images={images}
+          show={init}
+          initNo={init}
+          onClose={hideFn2}
+        />
         <h2>{translated.withInitNo}</h2>
         <ImagePreview
           images={images}
           show={showPreview2}
-          initNo={3}
+          initNo={init}
           onClose={hideFn2}
         />
-        <Cell title={translated.withInitNo} isLink onClick={showFn2} />
+        <Cell
+          title={translated.withInitNo}
+          onClick={() => {
+            showFn2()
+            setTimeout(() => setInit(1), 3000)
+          }}
+        />
         <h2>{translated.withPagination}</h2>
         <ImagePreview
           images={images}
@@ -126,7 +153,7 @@ const ImagePreviewDemo = () => {
           paginationColor="red"
           onClose={hideFn3}
         />
-        <Cell title={translated.withPagination} isLink onClick={showFn3} />
+        <Cell title={translated.withPagination} onClick={showFn3} />
         <h2>{translated.withVideos}</h2>
         <ImagePreview
           images={images}
@@ -134,7 +161,7 @@ const ImagePreviewDemo = () => {
           show={showPreview4}
           onClose={hideFn4}
         />
-        <Cell title={translated.withVideos} isLink onClick={showFn4} />
+        <Cell title={translated.withVideos} onClick={showFn4} />
       </div>
     </>
   )

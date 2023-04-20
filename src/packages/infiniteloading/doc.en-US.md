@@ -96,6 +96,7 @@ export default App;
 ```tsx
 import React, { useState, useEffect } from "react";
 import { Cell, Infiniteloading } from '@nutui/nutui-react';
+import { Jd } from '@nutui/icons-react';
 
 const InfiniteUlStyle = {
   height: '300px',
@@ -154,7 +155,8 @@ const App = () => {
       <Cell>
         <ul id="refreshScroll" style={InfiniteUlStyle}>
           <Infiniteloading
-            pullIcon="JD"
+            pullIcon={<Jd />}
+            loadIcon={<Jd />}
             containerId="refreshScroll"
             useWindow={false}
             isOpenRefresh
@@ -237,8 +239,8 @@ const App = () => {
           <Infiniteloading
             containerId="customScroll"
             useWindow={false}
-            loadTxt="loading"
-            loadMoreTxt="none～"
+            loadingText="loading"
+            loadMoreText="none～"
             hasMore={customHasMore}
             loadMore={customLoadMore}
           >
@@ -270,12 +272,12 @@ export default App;
 | useWindow | Add the scroll listener to the window or the parent of the listening component    | boolean | `true` |
 | useCapture          | Whether to use capture mode                        | boolean | `false`            |
 | containerId          | When useWindow is false, set the node ID by default                        | string | -            |
-| loadMoreTxt          | “No more” text                        | string | `Oops, this is the bottom`            |
+| loadMoreText `v2.0.0`         | “No more” text                        | string | `Oops, this is the bottom`            |
 | isOpenRefresh        | Enable pull refresh                         | boolean | `false`                |
-| pullIcon        | Pull refresh[icon name](#/icon)                        | string | -                |
-| pullTxt        | Pull refresh text                        | string | `Loose to refresh`                |
-| loadIcon        | Pull on loading[icon name](#/icon)                       | string | -            |
-| loadTxt        | Pull on loading text                         | string | `Loading...`                |
+| pullIcon        | Pull refresh[icon name](#/icon)                        | ReactNode | -                |
+| pullText        | Pull refresh text                        | string | `Loose to refresh`                |
+| loadIcon        | Pull on loading[icon name](#/icon)                       | ReactNode | -            |
+| loadingText`v2.0.0`        | Pull on loading text                         | string | `Loading...`                |
 
 ### Events
 

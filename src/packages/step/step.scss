@@ -1,5 +1,3 @@
-@import '../icon/icon.scss';
-
 .nut-theme-dark {
   .nut-step {
     &.nut-step-wait {
@@ -243,7 +241,8 @@
 .nut-steps-horizontal {
   &.nut-steps-dot {
     .nut-step-line {
-      top: calc(($steps-dot-icon-width + $steps-dot-icon-border * 2) / 2);
+      top: 50%;
+      bottom: -50%;
     }
   }
 }

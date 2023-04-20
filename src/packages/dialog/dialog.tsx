@@ -16,7 +16,7 @@ import {
 
 export type DialogProps = BasicDialogProps
 const defaultProps = {
-  okText: '确认',
+  confirmText: '确认',
   cancelText: '取消',
   mask: true,
   closeOnClickOverlay: true,
@@ -43,7 +43,7 @@ const BaseDialog: ForwardRefRenderFunction<
     lockScroll,
     okBtnDisabled,
     cancelAutoClose,
-    okText,
+    confirmText,
     cancelText,
     onClosed,
     onCancel,
@@ -79,7 +79,7 @@ const BaseDialog: ForwardRefRenderFunction<
         {!noCancelBtn && (
           <Button
             size="small"
-            plain
+            fill="outline"
             type="primary"
             className="nut-dialog__footer-cancel"
             onClick={handleCancel}
@@ -97,7 +97,7 @@ const BaseDialog: ForwardRefRenderFunction<
             disabled={okBtnDisabled}
             onClick={handleOk}
           >
-            {okText}
+            {confirmText}
           </Button>
         )}
       </>

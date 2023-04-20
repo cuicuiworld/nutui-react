@@ -4,6 +4,7 @@ import { useTranslate } from '@/sites/assets/locale/taro'
 import { Button, Uploader, Progress, Cell } from '@/packages/nutui.react.taro'
 import '@/packages/uploader/demo.scss'
 import Header from '@/sites/components/header'
+import { Dongdong } from '@nutui/icons-react-taro'
 
 export type FileItemStatus =
   | 'ready'
@@ -290,7 +291,11 @@ const UploaderDemo = () => {
             onStart={onStart}
             style={{ marginRight: '10px' }}
           />
-          <Uploader url={uploadUrl} uploadIcon="dongdong" onStart={onStart} />
+          <Uploader
+            url={uploadUrl}
+            uploadIcon={<Dongdong />}
+            onStart={onStart}
+          />
         </Cell>
 
         <h2>{translated.a4afedb5}</h2>
@@ -298,7 +303,7 @@ const UploaderDemo = () => {
           url={uploadUrl}
           defaultFileList={defaultFileList}
           onRemove={onDelete}
-          uploadIcon="dongdong"
+          uploadIcon={<Dongdong />}
         />
 
         <h2>{translated.uploadListShow}</h2>
@@ -309,21 +314,21 @@ const UploaderDemo = () => {
           multiple
           listType="list"
         >
-          <Button type="success" size="small">
+          <Button type="default" size="small">
             {translated.bb5caa9c}
           </Button>
         </Uploader>
 
         <h2>{translated['37c65f47']}</h2>
         <Uploader url={uploadUrl}>
-          <Button type="success" size="small">
+          <Button type="default" size="small">
             {translated.bb5caa9c}
           </Button>
         </Uploader>
 
         <h2>{translated.uploadDefaultProgress}</h2>
         <Uploader url={uploadUrl} onProgress={onProgress}>
-          <Button type="success" size="small">
+          <Button type="default" size="small">
             {translated.bb5caa9c}
           </Button>
         </Uploader>
@@ -374,14 +379,14 @@ const UploaderDemo = () => {
           ref={uploadRef}
         />
         <Button
-          type="success"
+          type="default"
           size="small"
           onClick={submitUpload}
           style={{ marginRight: '10px', marginTop: '20px' }}
         >
           {translated.fcf01d1a}
         </Button>
-        <Button type="danger" size="small" onClick={clearUpload}>
+        <Button type="primary" size="small" onClick={clearUpload}>
           {translated.clearBtnUpload}
         </Button>
 

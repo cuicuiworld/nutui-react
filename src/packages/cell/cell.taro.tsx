@@ -1,48 +1,27 @@
 import React, { FunctionComponent, ReactNode } from 'react'
-import { redirectTo, navigateTo } from '@tarojs/taro'
-import bem from '@/utils/bem'
-import Icon from '@/packages/icon/index.taro'
-
+import classNames from 'classnames'
 import { BasicComponent, ComponentDefaults } from '@/utils/typings'
 
 export interface CellProps extends BasicComponent {
   title: ReactNode
-  subTitle: ReactNode
-  desc: string
-  descTextAlign: string
-  isLink: boolean
-  icon: string
-  roundRadius: string | number
-  url: string
-  to: string
-  replace: boolean
-  center: boolean
-  size: string
-  className: string
-  iconSlot: ReactNode
-  linkSlot: ReactNode
+  description: ReactNode
+  extra: ReactNode
+  radius: string | number
+  align: string
   onClick: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
 }
 
 const defaultProps = {
   ...ComponentDefaults,
   title: null,
-  subTitle: null,
-  desc: '',
-  descTextAlign: 'right',
-  isLink: false,
-  icon: '',
-  roundRadius: '6px',
-  url: '',
-  to: '',
-  replace: false,
-  center: false,
-  size: '',
-  className: '',
-  iconSlot: null,
-  linkSlot: null,
+  description: null,
+  extra: null,
+  radius: '6px',
+  align: 'flex-start',
   onClick: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {},
 } as CellProps
+
+const classPrefix = 'nut-cell'
 
 export const Cell: FunctionComponent<
   Partial<CellProps> & Omit<React.HTMLAttributes<HTMLDivElement>, 'title'>
@@ -51,102 +30,64 @@ export const Cell: FunctionComponent<
     children,
     onClick,
     title,
-    subTitle,
-    desc,
-    descTextAlign,
-    isLink,
-    icon,
-    roundRadius,
-    url,
-    to,
-    replace,
-    center,
-    size,
+    description,
+    extra,
+    radius,
+    align,
     className,
-    iconSlot,
-    linkSlot,
-    iconClassPrefix,
-    iconFontClassName,
+    style,
     ...rest
   } = {
     ...defaultProps,
     ...props,
   }
-  const b = bem('cell')
+
   const handleClick = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     onClick(event)
-    const link = to || url
-    if (link) {
-      replace ? redirectTo({ url: link }) : navigateTo({ url: link })
-    }
   }
 
   const baseStyle = {
-    borderRadius: Number.isNaN(Number(roundRadius))
-      ? String(roundRadius)
-      : `${roundRadius}px`,
+    ...style,
+    borderRadius: Number.isNaN(Number(radius)) ? String(radius) : `${radius}px`,
+    alignItems: align,
   }
 
   const styles =
-    title || subTitle || icon
-      ? { textAlign: descTextAlign }
+    title || description
+      ? {}
       : {
-          textAlign: descTextAlign,
           flex: 1,
         }
   return (
     <div
-      className={`${b(
-        { clickable: !!(isLink || to), center, large: size === 'large' },
-        [className]
-      )} `}
+      className={classNames(classPrefix, className)}
       onClick={(event) => handleClick(event)}
       style={baseStyle}
       {...rest}
     >
       {children || (
         <>
-          {icon || iconSlot ? (
-            <div className={b('icon')}>
-              {iconSlot ||
-                (icon ? (
-                  <Icon
-                    classPrefix={iconClassPrefix}
-                    fontClassName={iconFontClassName}
-                    name={icon}
-                    className="icon"
-                  />
-                ) : null)}
-            </div>
-          ) : null}
-          {title || subTitle ? (
-            <div className={`${b('title')}`}>
-              {title ? <div className={b('maintitle')}>{title}</div> : null}
-              {subTitle ? (
-                <div className={b('subtitle')}>{subTitle}</div>
+          {title || description ? (
+            <div className={`${classPrefix}__left`}>
+              {title ? (
+                <div className={`${classPrefix}__title`}>{title}</div>
+              ) : null}
+              {description ? (
+                <div className={`${classPrefix}__description`}>
+                  {description}
+                </div>
               ) : null}
             </div>
           ) : null}
-          {desc ? (
+          {extra ? (
             <div
-              className={b('value', {
-                alone: !title && !subTitle,
-              })}
+              className={`${classPrefix}__extra`}
               style={styles as React.CSSProperties}
             >
-              {desc}
+              {extra}
             </div>
           ) : null}
-          {!linkSlot && (isLink || to) ? (
-            <Icon
-              classPrefix={iconClassPrefix}
-              fontClassName={iconFontClassName}
-              name="right"
-              className={b('link')}
-            />
-          ) : (
-            linkSlot
-          )}
+          <div className={`${classPrefix}__divider`} />
         </>
       )}
     </div>

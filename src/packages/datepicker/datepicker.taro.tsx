@@ -1,6 +1,7 @@
 import React, { FunctionComponent, useState, useEffect, useRef } from 'react'
 import Picker from '@/packages/picker/index.taro'
-import { useConfig } from '@/packages/configprovider'
+import { useConfig } from '@/packages/configprovider/index.taro'
+import { View } from '@tarojs/components'
 
 export interface PickerOption {
   text: string | number
@@ -22,7 +23,14 @@ export interface DatePickerProps {
   modelValue: Date | null
   visible: boolean
   title: string
-  type: 'date' | 'time' | 'year-month' | 'month-day' | 'datehour' | 'datetime'
+  type:
+    | 'date'
+    | 'time'
+    | 'year-month'
+    | 'month-day'
+    | 'datehour'
+    | 'datetime'
+    | 'hour-minutes'
   isShowChinese: boolean
   minuteStep: number
   minDate: Date
@@ -207,6 +215,9 @@ export const DatePicker: FunctionComponent<
       case 'year-month':
         result = result.slice(0, 2)
         break
+      case 'hour-minutes':
+        result = result.slice(3, 5)
+        break
       case 'month-day':
         result = result.slice(1, 3)
         break
@@ -388,15 +399,16 @@ export const DatePicker: FunctionComponent<
   }, [currentDate])
 
   return (
-    <div
+    <View
       className={`nut-datepicker ${className || ''}`}
       style={style}
-      {...rest}
+      catchMove
+      {...(rest as any)}
     >
       {listData.length > 0 && (
         <Picker
           title={title}
-          isVisible={show}
+          visible={show}
           listData={listData}
           onClose={onCloseDatePicker}
           defaultValueData={defaultValue}
@@ -412,7 +424,7 @@ export const DatePicker: FunctionComponent<
           ref={pickerRef}
         />
       )}
-    </div>
+    </View>
   )
 }
 

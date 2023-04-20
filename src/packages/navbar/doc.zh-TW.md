@@ -19,7 +19,8 @@ import { NavBar } from '@nutui/nutui-react';
 :::demo
 ```tsx
 import  React from "react";
-import { NavBar, Icon } from '@nutui/nutui-react';
+import { NavBar } from '@nutui/nutui-react';
+import { Share } from '@nutui/icons-react'
 
 const App = () => {
   return ( 
@@ -32,7 +33,9 @@ const App = () => {
           onClickBack={(e) => alert("標題")}
           onClickRight={(e) => alert('icon')}
         >
-          <Icon name="share" slot="right" />
+           <i slot="right">
+            <Share />
+          </i>
         </NavBar>
     </>
   );
@@ -52,7 +55,7 @@ const App = () => {
     <>   
       <NavBar
           title="瀏覽記錄"
-          desc="清空"
+          description="清空"
           leftShow
           onClickTitle={(e) => alert("返回")}
           onClickBack={(e) => alert("標題")}
@@ -69,21 +72,26 @@ export default App;
 :::demo
 ```tsx
 import  React from "react";
-import { NavBar, Icon } from '@nutui/nutui-react';
+import { NavBar } from '@nutui/nutui-react';
+import { Cart2, More } from '@nutui/icons-react'
 
 const App = () => {
   return ( 
     <>   
       <NavBar
           title="購物車"
-          desc="編輯"
-          titIcon="locationg3"
+          description="編輯"
           onClickTitle={(e) => alert("返回")}
           onClickBack={(e) => alert("標題")}
           onClickRight={(e) => alert('編輯')}
           onClickIcon={(e) => alert('icon')}
         >
-          <Icon name="more-x" slot="right" />
+          <i slot="titleIcon">
+            <Cart2 />
+          </i>
+          <i slot="right">
+            <More />
+          </i>
       </NavBar>
     </>
   );
@@ -96,7 +104,8 @@ export default App;
 :::demo
 ```tsx
 import  React from "react";
-import { NavBar, Icon } from '@nutui/nutui-react';
+import { NavBar } from '@nutui/nutui-react';
+import { Share } from '@nutui/icons-react'
 
 const App = () => {
   return ( 
@@ -110,7 +119,9 @@ const App = () => {
           onClickBack={(e) => alert("標題")}
           onClickRight={(e) => alert('icon')}
         >
-          <Icon name="share" slot="right" />
+           <i slot="right">
+            <Share />
+          </i>
       </NavBar>
     </>
   );
@@ -126,14 +137,15 @@ export default App;
 :::demo
 ```tsx
 import  React, { useState } from "react";
-import { NavBar, Icon, Tabs, TabPane } from '@nutui/nutui-react';
+import { NavBar, Tabs, TabPane } from '@nutui/nutui-react';
+import { More } from '@nutui/icons-react'
 
 const App = () => {
   const [tab1value, setTab1value] = useState('Tab 1')
   return ( 
     <>   
       <NavBar
-          desc="編輯"
+          description="編輯"
           onClickTitle={(e) => alert("標題")}
           onClickRight={(e) => alert("編輯")}
           onClickBack={(e) => alert("返回")}
@@ -146,7 +158,9 @@ const App = () => {
               <TabPane title="Tab 3"> Tab 3 </TabPane>
             </Tabs>
           </div>
-          <Icon name="more-x" slot="right" />
+          <i slot="right">
+            <More />
+          </i>
       </NavBar>
     </>
   );
@@ -161,9 +175,9 @@ export default App;
 | 字段            | 說明                                                                                           | 類型    | 默認值  |
 |-----------------|------------------------------------------------------------------------------------------------|---------|---------|
 | title           | 標題名稱                                                                                       | string  | -       |
-| desc            | 右側描述                                                                                       | string  | -       |
+| description            | 右側描述                                                                                       | string  | -       |
 | leftShow        | 是否展示左側箭頭                                                                              | boolean | `true`   |
-| titIcon         | 標題帶icon                                                         | string  | -       |   
+| titIcon`v2.0.0 废弃`           | 標題帶icon                                                         | string  | -       |   
 | leftText         | 左側文案                                                         | string  | -       |  
 | fixed         | 是否固定                                                         | boolean  | `false`       |   
 | safeAreaInsetTop         | 是否適配安全區                                                         | boolean  | `false`       |   

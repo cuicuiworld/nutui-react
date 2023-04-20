@@ -7,11 +7,11 @@ exports[`should render progress when use props 1`] = `
   >
     <div
       class="nut-progress-outer nut-progress-base"
-      style="border-radius: 12px; background: rgb(243, 243, 243);"
+      style="background: rgb(243, 243, 243);"
     >
       <div
         class="nut-progress-inner"
-        style="width: 100%; border-radius: 12px;"
+        style="width: 100%;"
       />
     </div>
     <div

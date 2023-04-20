@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Taro from '@tarojs/taro'
-import { SearchBar, Icon, Toast } from '@/packages/nutui.react.taro'
+import { SearchBar, Toast } from '@/packages/nutui.react.taro'
 import { useTranslate } from '@/sites/assets/locale/taro'
 import Header from '@/sites/components/header'
 
@@ -91,15 +91,11 @@ const SearchBarDemo = () => {
         <SearchBar
           label={translated.text}
           actionText={translated.test}
-          clearIconSize="14px"
+          clearSize="14px"
           onSearch={() => toastShow()}
         />
         <h2>{translated.title5}</h2>
-        <SearchBar
-          leftoutIcon={<Icon name="heart-fill1" size="14" />}
-          rightoutIcon={<Icon name="star-fill" size="14" />}
-          rightinIcon={<Icon name="star-fill" size="14" />}
-        />
+        <SearchBar />
         <h2>{translated.title6}</h2>
         <SearchBar
           onChange={(val: string, e: Event) => change(val, e)}

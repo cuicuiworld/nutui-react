@@ -10,14 +10,12 @@ import classNames from 'classnames'
 import { Image } from '@tarojs/components'
 import { AvatarContext } from '@/packages/avatargroup/AvatarContext'
 import bem from '@/utils/bem'
-import Icon from '@/packages/icon/index.taro'
 
 import { BasicComponent, ComponentDefaults } from '@/utils/typings'
 
 export interface AvatarProps extends BasicComponent {
   size: string
-  icon: string
-  iconSize?: string | number
+  icon: React.ReactNode
   shape: AvatarShape
   bgColor: string
   color: string
@@ -36,7 +34,6 @@ const defaultProps = {
   ...ComponentDefaults,
   size: '',
   icon: '',
-  iconSize: '',
   bgColor: '#eee',
   color: '#666',
   prefixCls: 'nut-avatar',
@@ -54,14 +51,11 @@ export const Avatar: FunctionComponent<
     color,
     url,
     icon,
-    iconSize,
     className,
     style,
     activeAvatar,
     onActiveAvatar,
     onError,
-    iconClassPrefix,
-    iconFontClassName,
     ...rest
   } = {
     ...defaultProps,
@@ -164,15 +158,12 @@ export const Avatar: FunctionComponent<
               {url && (
                 <Image className="avatar-img" src={url} onError={errorEvent} />
               )}
-              {icon && (
-                <Icon
-                  classPrefix={iconClassPrefix}
-                  fontClassName={iconFontClassName}
-                  className="icon"
-                  name={iconStyles}
-                  size={iconSize}
-                />
-              )}
+              {React.isValidElement(icon)
+                ? React.cloneElement<any>(icon, {
+                    ...icon.props,
+                    className: `${icon.props.className || ''} icon`,
+                  })
+                : null}
               {children && <span className="text">{children}</span>}
             </>
           )}

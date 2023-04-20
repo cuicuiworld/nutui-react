@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react'
 import classNames from 'classnames'
-import Icon from '@/packages/icon/index.taro'
+import { Left } from '@nutui/icons-react-taro'
 import bem from '@/utils/bem'
 
 import { BasicComponent, ComponentDefaults } from '@/utils/typings'
@@ -8,9 +8,8 @@ import { BasicComponent, ComponentDefaults } from '@/utils/typings'
 export interface NavBarProps extends BasicComponent {
   leftShow: boolean
   title: string
-  titIcon: string
   leftText: string
-  desc: string
+  description: string
   className: string
   fixed: boolean
   safeAreaInsetTop: boolean
@@ -28,9 +27,8 @@ export interface NavBarProps extends BasicComponent {
 const defaultProps = {
   ...ComponentDefaults,
   title: '',
-  desc: '',
+  description: '',
   leftShow: true,
-  titIcon: '',
   className: '',
   leftText: '',
   fixed: false,
@@ -42,9 +40,8 @@ const defaultProps = {
 } as NavBarProps
 export const NavBar: FunctionComponent<Partial<NavBarProps>> = (props) => {
   const {
-    desc,
+    description,
     title,
-    titIcon,
     leftShow,
     className,
     style,
@@ -58,8 +55,6 @@ export const NavBar: FunctionComponent<Partial<NavBarProps>> = (props) => {
     onClickIcon,
     onClickBack,
     onClickRight,
-    iconClassPrefix,
-    iconFontClassName,
   } = {
     ...defaultProps,
     ...props,
@@ -73,7 +68,7 @@ export const NavBar: FunctionComponent<Partial<NavBarProps>> = (props) => {
   const slot = children.reduce((slot: any, item: React.ReactElement) => {
     const data = slot
     if (item && item.props) {
-      data[item.props.slot] = item
+      data[item.props.slot] = item.props.children
     }
     return data
   }, {})
@@ -88,14 +83,7 @@ export const NavBar: FunctionComponent<Partial<NavBarProps>> = (props) => {
   const renderLeft = () => {
     return (
       <div className={`${b('left')}`} onClick={(e) => onClickBack(e)}>
-        {leftShow && (
-          <Icon
-            classPrefix={iconClassPrefix}
-            fontClassName={iconFontClassName}
-            name="left"
-            color="#979797"
-          />
-        )}
+        {leftShow && <Left name="left" color="#979797" />}
         {leftText && <div className={`${b('text')}`}>{leftText}</div>}
         {slot.left}
       </div>
@@ -110,14 +98,8 @@ export const NavBar: FunctionComponent<Partial<NavBarProps>> = (props) => {
             {title}
           </div>
         )}
-        {titIcon && (
-          <div onClick={(e) => onClickIcon(e)}>
-            <Icon
-              classPrefix={iconClassPrefix}
-              fontClassName={iconFontClassName}
-              name={titIcon}
-            />
-          </div>
+        {slot.titleIcon && (
+          <div onClick={(e) => onClickIcon(e)}>{slot.titleIcon}</div>
         )}
         {slot.content}
       </div>
@@ -127,7 +109,7 @@ export const NavBar: FunctionComponent<Partial<NavBarProps>> = (props) => {
   const renderRight = () => {
     return (
       <div className={`${b('right')}`} onClick={(e) => onClickRight(e)}>
-        {desc && <div className={`${b('text')}`}>{desc}</div>}
+        {description && <div className={`${b('text')}`}>{description}</div>}
         {slot.right}
       </div>
     )

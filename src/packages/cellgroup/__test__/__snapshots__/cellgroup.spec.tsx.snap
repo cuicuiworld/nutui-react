@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`prop title desc subtitle 1`] = `
+exports[`prop title description extra 1`] = `
 <div>
   <div
     class="nut-cell-group"
@@ -14,45 +14,42 @@ exports[`prop title desc subtitle 1`] = `
       class="nut-cell-group__wrap"
     >
       <div
-        class="nut-cell nut-cell--clickable "
-        style="border-radius: 6px;"
-        to=""
+        class="nut-cell"
+        style="border-radius: 6px; align-items: flex-start;"
       >
         <div
-          class="nut-cell__title"
+          class="nut-cell__left"
         >
           <div
-            class="nut-cell__maintitle"
+            class="nut-cell__title"
           >
             链接
           </div>
         </div>
-        <i
-          class="nutui-iconfont nut-icon nut-icon-right nut-cell__link"
+        <div
+          class="nut-cell__divider"
         />
       </div>
       <div
-        class="nut-cell nut-cell--clickable "
-        style="border-radius: 6px;"
-        to=""
+        class="nut-cell"
+        style="border-radius: 6px; align-items: flex-start;"
       >
         <div
-          class="nut-cell__title"
+          class="nut-cell__left"
         >
           <div
-            class="nut-cell__maintitle"
+            class="nut-cell__title"
           >
             URL 跳转
           </div>
         </div>
         <div
-          class="nut-cell__value"
-          style="text-align: right;"
+          class="nut-cell__extra"
         >
           https://jd.com
         </div>
-        <i
-          class="nutui-iconfont nut-icon nut-icon-right nut-cell__link"
+        <div
+          class="nut-cell__divider"
         />
       </div>
     </div>

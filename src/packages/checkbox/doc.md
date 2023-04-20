@@ -9,6 +9,7 @@
 ```ts
 // react
 import { Checkbox } from '@nutui/nutui-react';
+
 ```
 
 ## 基本用法
@@ -107,17 +108,19 @@ export default CheckBoxDemo;
 
 ## 自定义图标
 
-这里建议同时设置 `iconName` 和 `iconActiveName` 属性
+这里建议同时设置 `icon` 和 `checkedIcon` 属性
 
 :::demo
 
 ```tsx
 import React from "react";
 import { Checkbox } from '@nutui/nutui-react';
+import { Checklist } from '@nutui/icons-react'
 
 const CheckBoxDemo = () => {
   return (<>
-    <Checkbox iconName="checklist" iconActiveName="checklist">自定义图标</Checkbox>
+    <Checkbox icon={<Checklist />}
+              checkedIcon={<Checklist />}>自定义图标</Checkbox>
   </>)
 }
 export default CheckBoxDemo;
@@ -425,35 +428,38 @@ export default CheckboxGroupOptions;
 
 ## Checkbox
 
-| 字段                            | 说明 | 类型 | 默认值 | 
-|-------------------------------| ----- | ----- | -----|
-| checked                       | 是否处于选中状态 | boolean | `false`|
-| disabled                      | 是否禁用选择 | boolean | `false`|
-| textPosition                  | 文本所在的位置，可选值：`left`,`right` | string | `right`|
-| iconSize                      | [图标尺寸](#/icon) | string \| number | `18`|
-| iconName                      | [图标名称](#/icon)，选中前(建议和`iconActiveName`一起修改) | string | `check-normal`|
-| iconActiveName                | [图标名称](#/icon)，选中后(建议和`iconName`一起修改) | string | `checked`|
-| iconIndeterminateName`v1.2.1` | [图标名称](#/icon)，半选状态 | string | `check-disabled`|
-| iconClassPrefix`v1.2.1`       | 自定义 icon 类名前缀，用于使用自定义图标        | string                  | `nut-icon` |
-| iconFontClassName`v1.2.1`       | 自定义 icon 字体基础类名        | string                  | `nutui-iconfont` |
-| label                         | 复选框的文本内容 | string | -|
+| 字段                             | 说明                                          | 类型            | 默认值               | 
+|--------------------------------|---------------------------------------------|---------------|-------------------|
+| checked                        | 是否处于选中状态                                    | `boolean`       | `false`           |
+| disabled                       | 是否禁用选择                                      | `boolean`       | `false`           |
+| textPosition                   | 文本所在的位置，可选值：`left`,`right`                  | `string`        | `right`           |
+| iconSize                       | [图标尺寸]用于设置默认图标的大小                           | `string`、`number` | `18`              |
+| icon`v2.0.0`                   | [图标](#/icon)，选中前(建议和`iconActiveName`一起修改)   | `ReactNode`   | `'CheckNormal'`   |
+| checkedIcon`v2.0.0`            | [图标](#/icon)，选中后(建议和`iconName`一起修改)         | `ReactNode`   | `'Checked'`       |
+| indeterminateIcon`v2.0.0`      | [图标](#/icon)，半选状态                           | `ReactNode`         | `'CheckDisabled'` |
+| iconName`v2.0.0废弃`             | [图标名称](#/icon)，选中前(建议和`iconActiveName`一起修改) | `ReactNode`   | `'CheckNormal'`   |
+| iconActiveName`v2.0.0废弃`       | [图标名称](#/icon)，选中后(建议和`iconName`一起修改)       | `ReactNode`   | `'Checked'`       |
+| iconIndeterminateName`v2.0.0废弃` | [图标名称](#/icon)，半选状态                         | `ReactNode`         | `'CheckDisabled'` |
+| iconClassPrefix`v2.0.0废弃`      | 自定义 icon 类名前缀，用于使用自定义图标                     | `string`        | `nut-icon`        |
+| iconFontClassName`v2.0.0废弃`    | 自定义 icon 字体基础类名                             | `string`        | `nutui-iconfont`  |
+| label                          | 复选框的文本内容                                    | `string`        | -                 |
 
 ## Checkbox.Group
 
 | 字段           | 说明 | 类型          | 默认值|
 |--------------| ----- |-------------| -- |
-| checkedValue | 当前选中项的标识符，和 `label` 相对应  | string      | -|
-| disabled     | 是否禁用选择,将用于其下的全部复选框 | boolean     | `false`|
-| max`v1.2.1` | 限制最大可选数 | undefined \| number | `undefined`|
-| textPosition`v1.4.8` | 文本所在的位置，可选值：`left`,`right`| string| `right` |
-| direction`v1.4.8` | 使用横纵方向 可选值 horizontal、vertical| string| `vertical` |
+| checkedValue | 当前选中项的标识符，和 `label` 相对应  | `string`      | -|
+| disabled     | 是否禁用选择,将用于其下的全部复选框 | `boolean`     | `false`|
+| max | 限制最大可选数 | `undefined|number` | `undefined`|
+| textPosition`v1.4.8` | 文本所在的位置，可选值：`left`,`right`| `string`| `right` |
+| direction`v1.4.8` | 使用横纵方向 可选值 horizontal、vertical| `string`| `vertical` |
 | options `v1.3.10` | 配置 options 渲染复选按钮 | Array| `Array<{ label: string value: string disabled?: boolean }` |
 
 ## Checkbox Event
 
 | 字段 | 说明 | 回调参数|
 |----- | ----- | ----- |
-| onChange | 值变化时触发 | `state, label`,`state`代表当前状态，`label`表示当前选中的值|
+| onChange | 值变化时触发 | (state, label),`state`代表当前状态，`label`表示当前选中的值|
 
 ## Checkbox.Group Event
 
@@ -465,8 +471,8 @@ export default CheckboxGroupOptions;
 
 | 方法名               | 说明 | 参数 |
 |-------------------| ----- | ----- |
-| toggleAll`v1.2.1` | 全选/取消 | `f`,传 `true`,表示全选，传 `false`,表示取消全选 |
-| toggleReverse`v1.2.1`   | 反选 | - |
+| toggleAll | 全选/取消 | `f`,传 `true`,表示全选，传 `false`,表示取消全选 |
+| toggleReverse   | 反选 | - |
 
 ## 主题定制
 
@@ -476,10 +482,10 @@ export default CheckboxGroupOptions;
 
 | 名称 | 默认值 |
 | --- | --- |
-| --nutui-checkbox-label-color | `$gray1` |
-| --nutui-checkbox-label-disable-color | `#999` |
-| --nutui-checkbox-icon-disable-color | `#d6d6d6` |
-| --nutui-checkbox-label-margin-left | `15px` |
-| --nutui-checkbox-label-font-size | `14px` |
-| --nutui-checkbox-icon-font-size | `18px` |
-| --nutui-checkbox-icon-disable-color2 | `$help-color` |
+| --nutui-checkbox-label-color | ` $gray1` |
+| --nutui-checkbox-label-disable-color | `  #999` |
+| --nutui-checkbox-icon-disable-color | `  #d6d6d6` |
+| --nutui-checkbox-label-margin-left | `  15px` |
+| --nutui-checkbox-label-font-size | ` 14px` |
+| --nutui-checkbox-icon-font-size | ` 18px` |
+| --nutui-checkbox-icon-disable-color2 | `  $help-color` |

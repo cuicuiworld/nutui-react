@@ -1,98 +1,61 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`prop icon 1`] = `
+exports[`prop  1`] = `
 <div>
   <div
-    class="nut-cell nut-cell--clickable "
-    style="border-radius: 6px;"
-    to=""
+    class="nut-cell"
+    style="border-radius: 6px; align-items: flex-start;"
   >
     <div
-      class="nut-cell__icon"
-    >
-      <i
-        class="nutui-iconfont nut-icon nut-icon-my icon"
-      />
-    </div>
-    <div
-      class="nut-cell__title"
+      class="nut-cell__left"
     >
       <div
-        class="nut-cell__maintitle"
-      >
-        姓名
-      </div>
-    </div>
-    <div
-      class="nut-cell__value"
-      style="text-align: right;"
-    >
-      张三
-    </div>
-    <i
-      class="nutui-iconfont nut-icon nut-icon-right nut-cell__link"
-    />
-  </div>
-</div>
-`;
-
-exports[`prop isLink 1`] = `
-<div>
-  <div
-    class="nut-cell nut-cell--clickable "
-    style="border-radius: 6px;"
-    to=""
-  >
-    <div
-      class="nut-cell__title"
-    >
-      <div
-        class="nut-cell__maintitle"
+        class="nut-cell__title"
       >
         URL 跳转
       </div>
     </div>
     <div
-      class="nut-cell__value"
-      style="text-align: right;"
+      class="nut-cell__extra"
     >
       https://m.jd.com/
     </div>
-    <i
-      class="nutui-iconfont nut-icon nut-icon-right nut-cell__link"
+    <div
+      class="nut-cell__divider"
     />
   </div>
 </div>
 `;
 
-exports[`prop title desc subtitle test 1`] = `
+exports[`prop title extra description test 1`] = `
 <div>
   <div
-    class="nut-cell "
+    class="nut-cell"
     data-testid="prop"
-    style="border-radius: 6px;"
-    to=""
+    style="border-radius: 6px; align-items: flex-start;"
   >
     <div
-      class="nut-cell__title"
+      class="nut-cell__left"
     >
       <div
-        class="nut-cell__maintitle"
+        class="nut-cell__title"
       >
         我是标题
       </div>
       <div
-        class="nut-cell__subtitle"
+        class="nut-cell__description"
       >
-        副标题描述
+        我是描述
       </div>
     </div>
     <div
-      class="nut-cell__value"
-      style="text-align: right;"
+      class="nut-cell__extra"
     >
       描述文字
     </div>
+    <div
+      class="nut-cell__divider"
+    />
   </div>
 </div>
 `;
@@ -100,40 +63,61 @@ exports[`prop title desc subtitle test 1`] = `
 exports[`slot default test 1`] = `
 <div>
   <div
-    class="nut-cell "
-    style="border-radius: 6px;"
-    to=""
+    class="nut-cell"
+    style="border-radius: 6px; align-items: flex-start;"
   >
-    <div>
-      自定义内容
+    <div
+      class="nut-cell__left"
+    >
+      <div
+        class="nut-cell__title"
+      >
+        <div>
+          自定义内容
+        </div>
+      </div>
     </div>
+    <div
+      class="nut-cell__extra"
+    >
+      描述文字
+    </div>
+    <div
+      class="nut-cell__divider"
+    />
   </div>
 </div>
 `;
 
-exports[`slot linkSlot 1`] = `
+exports[`slot extra 1`] = `
 <div>
   <div
-    class="nut-cell "
-    style="border-radius: 6px;"
-    to=""
+    class="nut-cell"
+    style="border-radius: 6px; align-items: flex-start;"
   >
     <div
-      class="nut-cell__title"
+      class="nut-cell__left"
     >
       <div
-        class="nut-cell__maintitle"
+        class="nut-cell__title"
       >
         Switch
       </div>
     </div>
     <div
-      class="nut-switch switch-open  nut-switch-base "
+      class="nut-cell__extra"
     >
       <div
-        class="switch-button"
-      />
+        class="nut-switch switch-open  nut-switch-base "
+      >
+        <div
+          class="switch-button"
+        />
+      </div>
     </div>
+    <div
+      class="nut-cell__divider"
+    />
   </div>
 </div>
 `;

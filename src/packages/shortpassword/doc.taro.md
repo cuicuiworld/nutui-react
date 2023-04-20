@@ -29,7 +29,7 @@ const App = () => {
      <>
        <Cell
         title="基础用法"
-        isLink
+        
         onClick={() => {
           setVisible(true)
         }}
@@ -54,6 +54,7 @@ export default App;
 ```tsx
 import React, { useState } from "react";
 import { Cell,ShortPassword } from '@nutui/nutui-react-taro';
+import { HeartFill1 } from '@nutui/icons-react-taro';
 
 const App = () => {
   const [visible,setVisible] = useState(false)
@@ -69,21 +70,23 @@ const App = () => {
      <>
        <Cell
         title="显示按钮组"
-        isLink
+        
         onClick={() => {
           setVisible(true)
         }}
        />
         <ShortPassword
-        visible={visible}
-        modelValue={value}
-        onClose={() => close()}
-        noButton={false}
-        onChange={(value) => setValue(value)}
-        onOk={() => setVisible(false)}
-        onCancel={() => setVisible(false)}
-       />
-     </>
+          visible={visible}
+          modelValue={value}
+          tipsIcon={<HeartFill1 />}
+          iconSize={16}
+          onClose={() => close()}
+          noButton={false}
+          onChange={(value) => setValue(value)}
+          onOk={() => setVisible(false)}
+          onCancel={() => setVisible(false)}
+        />
+      </>
   )
 }
 export default App;
@@ -111,7 +114,7 @@ const App = () => {
      <>
        <Cell
         title="自定义密码长度4"
-        isLink
+        
         onClick={() => {
           setVisible(true)
         }}
@@ -150,7 +153,7 @@ const App = () => {
      <>
        <Cell
         title="忘记密码提示语事件回调"
-        isLink
+        
         onClick={() => {
           setVisible(true)
         }}
@@ -181,13 +184,15 @@ export default App;
 | modelValue         | 内容               | string \| number | -                |
 | visible        | 是否展示短密码框                         | boolean | `false`              |
 | title                  | 标题                | string         | `请输入密码`                   |
-| desc                   | 密码框描述          | string         | `您使用了虚拟资产，请进行验证` |
+| description                   | 密码框描述          | string         | `您使用了虚拟资产，请进行验证` |
 | tips                   | 提示语              | string         | `忘记密码`                     |
 | closeOnClickOverlay | 是否点击遮罩关闭    | boolean        | `true`                         |
 | noButton              | 是否隐藏底部按钮    | boolean        | `true`                         |
 | length                 | 密码长度，取值为4~6 | string \| number | `6`                            |
 | errorMsg              | 错误信息提示        | string         | -                           |
 | autoFocus              | 自动聚焦        | boolean         | `false`                           |
+| tipsIcon `v2.0.0` | 忘记密码提示icon | `ReactNode`  | - |
+| iconSize `v2.0.0` | 图标大小 | string \| number  | `11` |
 
 ### Events
 

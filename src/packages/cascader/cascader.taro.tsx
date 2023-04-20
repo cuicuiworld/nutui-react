@@ -49,7 +49,7 @@ export interface CascaderProps {
 const defaultProps = {
   className: '',
   style: {},
-  activeColor: '#fa2c19',
+  activeColor: '',
   checkedIcon: 'checklist',
   tabsColor: '',
   poppable: true,
@@ -426,7 +426,6 @@ const InternalCascader: ForwardRefRenderFunction<
           round
           closeable={closeable}
           closeIconPosition={closeIconPosition}
-          closeIcon={closeIcon}
           onClickOverlay={closePopup}
           onClickCloseIcon={closePopup}
         >

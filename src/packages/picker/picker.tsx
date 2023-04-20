@@ -7,7 +7,7 @@ import React, {
 } from 'react'
 import Popup from '@/packages/popup'
 import PickerSlot from './pickerSlot'
-import useRefs from '@/utils/useRefs'
+import useRefs from '@/utils/use-refs'
 import { useConfig } from '@/packages/configprovider'
 import bem from '@/utils/bem'
 
@@ -19,7 +19,7 @@ export interface PickerOption {
   className?: string | number
 }
 export interface PickerProps {
-  isVisible: boolean
+  visible: boolean
   title?: string
   listData: (PickerOption | PickerOption[])[]
   defaultValueData?: (number | string)[]
@@ -51,7 +51,7 @@ const InternalPicker: ForwardRefRenderFunction<unknown, Partial<PickerProps>> =
   (props, ref) => {
     const { locale } = useConfig()
     const {
-      isVisible,
+      visible,
       title,
       listData = [],
       defaultValueData,
@@ -281,7 +281,7 @@ const InternalPicker: ForwardRefRenderFunction<unknown, Partial<PickerProps>> =
     }
     return (
       <Popup
-        visible={isVisible}
+        visible={visible}
         position="bottom"
         onClose={() => {
           closeActionSheet()

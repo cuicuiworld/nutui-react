@@ -1,32 +1,29 @@
-import React, { FunctionComponent, useEffect, useState, useRef } from 'react'
-
-import Icon from '@/packages/icon'
+import React, {
+  FunctionComponent,
+  useEffect,
+  useState,
+  useRef,
+  ReactNode,
+} from 'react'
+import { Top } from '@nutui/icons-react'
+import classNames from 'classnames'
 import { BasicComponent, ComponentDefaults } from '@/utils/typings'
 
 declare const window: any
 
 export interface BackTopProps extends BasicComponent {
-  className?: string
-  bottom: number
-  right: number
-  elId: string
-  distance: number
+  target: string
+  threshold: number
   zIndex: number
-  isAnimation: boolean
   duration: number
-  children?: HTMLElement | any
-  style?: React.CSSProperties
   onClick?: (event: MouseEvent) => void
 }
 
 const defaultProps = {
   ...ComponentDefaults,
-  bottom: 20,
-  right: 10,
-  elId: 'body',
-  distance: 200,
+  target: '',
+  threshold: 200,
   zIndex: 10,
-  isAnimation: true,
   duration: 1000,
 } as BackTopProps
 
@@ -35,22 +32,20 @@ export const BackTop: FunctionComponent<
 > = (props) => {
   const {
     children,
-    bottom,
-    right,
-    elId,
-    distance,
+    target,
+    threshold,
     zIndex,
-    isAnimation,
     className,
     duration,
     style,
     onClick,
-    iconClassPrefix,
-    iconFontClassName,
   } = {
     ...defaultProps,
     ...props,
   }
+
+  const classPrefix = 'nut-backtop'
+
   const [backTop, SetBackTop] = useState(false)
   const [scrollTop, SetScrollTop] = useState(0)
   let startTime = 0
@@ -63,8 +58,8 @@ export const BackTop: FunctionComponent<
   }, [])
 
   const init = () => {
-    if (elId && document.getElementById(elId)) {
-      scrollEl.current = document.getElementById(elId) as HTMLElement | Window
+    if (target && document.getElementById(target)) {
+      scrollEl.current = document.getElementById(target) as HTMLElement | Window
     } else {
       scrollEl.current = window
     }
@@ -80,7 +75,7 @@ export const BackTop: FunctionComponent<
       top = scrollEl.current.scrollTop
       SetScrollTop(top)
     }
-    const showBtn = top >= distance
+    const showBtn = top >= threshold
 
     SetBackTop(showBtn)
   }
@@ -135,32 +130,31 @@ export const BackTop: FunctionComponent<
     onClick && onClick(e)
     const otime = +new Date()
     startTime = otime
-    isAnimation && duration > 0 ? scrollAnimation() : scroll()
+    duration > 0 ? scrollAnimation() : scroll()
   }
 
-  const backTopClass = {
-    right: `${right}px`,
-    bottom: `${bottom}px`,
-    zIndex,
-  }
+  const styles = style
+    ? {
+        zIndex,
+        ...style,
+      }
+    : {
+        right: '10px',
+        bottom: '20px',
+        zIndex,
+      }
 
   return (
     <div
-      className={`nut-backtop ${backTop ? 'show' : ''} ${className || ''}`}
-      style={{ ...backTopClass, ...style }}
+      className={classNames(classPrefix, className, {
+        show: backTop,
+      })}
+      style={styles}
       onClick={(e) => {
         goTop(e)
       }}
     >
-      {children || (
-        <Icon
-          classPrefix={iconClassPrefix}
-          fontClassName={iconFontClassName}
-          size="19px"
-          className="nut-backtop-main"
-          name="top"
-        />
-      )}
+      {children || <Top width={19} height={19} className="nut-backtop-main" />}
     </div>
   )
 }

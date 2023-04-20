@@ -1,8 +1,18 @@
 import React, { useRef, useState } from 'react'
+import {
+  My2,
+  Cart2,
+  Location2,
+  Service,
+  Notice,
+  Category,
+  Scan2,
+  Location,
+  Message,
+} from '@nutui/icons-react'
 import { useTranslate } from '../../sites/assets/locale'
 import { Popover } from './popover'
 import Button from '@/packages/button'
-import Icon from '@/packages/icon'
 import Cell from '@/packages/cell'
 
 interface T {
@@ -10,7 +20,7 @@ interface T {
 }
 interface List {
   name: string
-  icon?: string
+  icon?: React.ReactNode
   disabled?: boolean
 }
 
@@ -87,15 +97,15 @@ const BadgeDemo = () => {
   const iconItemList = [
     {
       name: 'option1',
-      icon: 'my2',
+      icon: <My2 />,
     },
     {
       name: 'option2',
-      icon: 'cart2',
+      icon: <Cart2 />,
     },
     {
       name: 'option3',
-      icon: 'location2',
+      icon: <Location2 />,
     },
   ]
   const itemListDisabled = [
@@ -113,28 +123,28 @@ const BadgeDemo = () => {
   ]
   const selfContent = [
     {
-      name: 'service',
-      desc: 'option1',
+      name: <Service />,
+      description: 'option1',
     },
     {
-      name: 'notice',
-      desc: 'option2',
+      name: <Notice />,
+      description: 'option2',
     },
     {
-      name: 'location',
-      desc: 'option3',
+      name: <Location />,
+      description: 'option3',
     },
     {
-      name: 'category',
-      desc: 'option4',
+      name: <Category />,
+      description: 'option4',
     },
     {
-      name: 'scan2',
-      desc: 'option5',
+      name: <Scan2 />,
+      description: 'option5',
     },
     {
-      name: 'message',
-      desc: 'option6',
+      name: <Message />,
+      description: 'option6',
     },
   ]
   const [lightTheme, setLightTheme] = useState(false)
@@ -275,12 +285,12 @@ const BadgeDemo = () => {
                       style={selfContentItem}
                       key={item.name}
                     >
-                      <Icon name={item.name} size="15" />
+                      <Location2 />
                       <div
-                        className="self-content-desc"
+                        className="self-content-description"
                         style={selfContentDesc}
                       >
-                        {item.desc}
+                        {item.description}
                       </div>
                     </div>
                   )

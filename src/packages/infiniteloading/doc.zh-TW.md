@@ -95,6 +95,7 @@ export default App;
 ```tsx
 import React, { useState, useEffect } from "react";
 import { Cell, Infiniteloading } from '@nutui/nutui-react';
+import { Jd } from '@nutui/icons-react';
 
 const InfiniteUlStyle = {
   height: '300px',
@@ -153,7 +154,8 @@ const App = () => {
       <Cell>
         <ul id="refreshScroll" style={InfiniteUlStyle}>
           <Infiniteloading
-            pullIcon="JD"
+            pullIcon={<Jd />}
+            loadIcon={<Jd />}
             containerId="refreshScroll"
             useWindow={false}
             isOpenRefresh
@@ -236,8 +238,8 @@ const App = () => {
           <Infiniteloading
             containerId="customScroll"
             useWindow={false}
-            loadTxt="loading"
-            loadMoreTxt="沒有啦～"
+            loadingText="loading"
+            loadMoreText="沒有啦～"
             hasMore={customHasMore}
             loadMore={customLoadMore}
           >
@@ -269,12 +271,12 @@ export default App;
 | useWindow | 將滾動偵聽器添加到 window 否則偵聽組件的父節點     | boolean | `true` |
 | useCapture          | 是否使用捕獲模式 true 捕獲 false 冒泡                        | boolean | `false`            |
 | containerId          | 在 useWindow 屬性為 false 的時候，自定義設置節點ID                       | string | -            |
-| loadMoreTxt          | “沒有更多數”據展示文案                        | string | `哎呀，這裡是底部了啦`            |
+| loadMoreText `v2.0.0`         | “沒有更多數”據展示文案                        | string | `哎呀，這裡是底部了啦`            |
 | isOpenRefresh        | 是否開啟下拉刷新                         | boolean | `false`                |
-| pullIcon        | 下拉刷新[圖標名稱](#/icon)                        | string | -                |
-| pullTxt        | 下拉刷新提示文案                         | string | `鬆手刷新`                |
-| loadIcon        | 上拉加載[圖標名稱](#/icon)                       | string | -            |
-| loadTxt        | 上拉加載提示文案                         | string | `加載中...`                |
+| pullIcon        | 下拉刷新[圖標名稱](#/icon)                        | ReactNode | -                |
+| pullText        | 下拉刷新提示文案                         | string | `鬆手刷新`                |
+| loadIcon        | 上拉加載[圖標名稱](#/icon)                       | ReactNode | -            |
+| loadingText `v2.0.0`        | 上拉加載提示文案                         | string | `加載中...`                |
 
 ### Events
 

@@ -9,6 +9,7 @@ Label for labeling and classification.
 ``` javascript
 // react
 import { Tag } from '@nutui/nutui-react';
+
 ```
 
 ## Code instance
@@ -189,23 +190,24 @@ export default App;
 
 ### Props
 
-| Field       | illustrate                                      | type    | Defaults    |
-|------------|--------------------------------------------------|---------|-----------|
-| type       | Label type, the optional value is primary success danger warning | string  | `default` |
-| color      | Label color                                         | string  | -         |
-| texColor | Text color, priority is higher than the color attribute  | string  | `white`   |
-| plain      | Whether it is hollow                               | boolean | `false`   |
-| round      | Whether it is a rounded style                      | boolean | `false`   |
-| mark       | Whether it is a tag style                          | boolean | `false`   |
-| closeable  | Whether it can be closed label                     | boolean | `false`   |
-| iconSize`v1.4.7` | the size of closed label  | string \| number | `12px`|
+| Field                   | illustrate                                                       | type   | Defaults   |
+|-------------------------|------------------------------------------------------------------|--------|----------|
+| type                    | Label type, the optional value is primary success danger warning | `string` | `default` |
+| color                   | Label color                                                      | `string` | -        |
+| textColor                | Text color, priority is higher than the color attribute          | `string` | `white`  |
+| plain                   | Whether it is hollow                                             | `boolean` | `false`  |
+| round                   | Whether it is a rounded style                                    | `boolean` | `false`  |
+| mark                    | Whether it is a tag style                                        | `boolean` | `false`  |
+| closeable               | Whether it can be closed label                                   | `boolean\ | ReactNode` | `false`   |
+| closeIcon`v2.0.0`       | close icon                                                       | `ReactNode` | `null`    |
+| iconSize`v2.0.0abandon` | the size of closed label                                         | `string\|number` | ` 12px`|
 
 ### Event
 
 | Event name | illustrate  | Callback parameter |
 |----------|----------|----------|
-| onClick    | Click event | `event`    |
-| onClose    | Close event | `event`    |
+| onClick    | Click event | event    |
+| onClose    | Close event | event    |
 
 
 ## Theming
@@ -216,15 +218,15 @@ The component provides the following CSS variables, which can be used to customi
 
 | Name | Default Value |
 | --- | --- |
-| --nutui-tag-padding | `0 4px`|
-| --nutui-tag-font-size | `12px` |
-| --nutui-tag-default-border-radius | `4px` |
-| --nutui-tag-round-border-radius | `8px` |
-| --nutui-tag-default-background-color | `#000000` |
-| --nutui-tag-primary-background-color | `#3460fa` |
-| --nutui-tag-success-background-color | `#4fc08d` |
-| --nutui-tag-danger-background-color-plain | `#df3526` |
-| --nutui-tag-warning-background-color | `#f3812e` |
-| --nutui-tag-default-color | `#ffffff` |
-| --nutui-tag-border-width | `1px` |
-| --nutui-tag-height | `auto` |
+| --nutui-tag-padding | ` 0 4px`|
+| --nutui-tag-font-size | ` 12px` |
+| --nutui-tag-default-border-radius | `  4px` |
+| --nutui-tag-round-border-radius | ` 8px` |
+| --nutui-tag-default-background-color | `  #000000` |
+| --nutui-tag-primary-background-color | `  #3460fa` |
+| --nutui-tag-success-background-color | `  #4fc08d` |
+| --nutui-tag-danger-background-color-plain | `  #df3526` |
+| --nutui-tag-warning-background-color | `  #f3812e` |
+| --nutui-tag-default-color | ` #ffffff` |
+| --nutui-tag-border-width | ` 1px` |
+| --nutui-tag-height | ` auto` |

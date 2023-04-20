@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
+import { CircleClose, Heart } from '@nutui/icons-react-taro'
 import { useTranslate } from '@/sites/assets/locale/taro'
 import '@/packages/popup/demo.scss'
-import { Cell, Popup } from '@/packages/nutui.react.taro'
+import { Cell, Popup, Input, Button } from '@/packages/nutui.react.taro'
 import Header from '@/sites/components/header'
 import Taro from '@tarojs/taro'
 
@@ -94,7 +95,6 @@ const PopupDemo = () => {
         <h2>{translated.ce5c5446}</h2>
         <Cell
           title={translated.c38a08ef}
-          isLink
           onClick={() => {
             setShowBasic(true)
           }}
@@ -112,7 +112,6 @@ const PopupDemo = () => {
         <h2>{translated.a74a1fd4}</h2>
         <Cell
           title={translated['8dab2f66']}
-          isLink
           onClick={() => {
             setShowTop(true)
           }}
@@ -128,7 +127,6 @@ const PopupDemo = () => {
         />
         <Cell
           title={translated.cfbdc781}
-          isLink
           onClick={() => {
             setShowBottom(true)
           }}
@@ -140,10 +138,16 @@ const PopupDemo = () => {
           onClose={() => {
             setShowBottom(false)
           }}
-        />
+        >
+          <div>
+            <Input placeholder="测试京麦的哦" type="number" />
+          </div>
+          <div>
+            <Button>chuxian</Button>
+          </div>
+        </Popup>
         <Cell
           title={translated.c3a3a1d2}
-          isLink
           onClick={() => {
             setShowLeft(true)
           }}
@@ -158,7 +162,6 @@ const PopupDemo = () => {
         />
         <Cell
           title={translated.e51e4582}
-          isLink
           onClick={() => {
             setShowRight(true)
           }}
@@ -175,24 +178,22 @@ const PopupDemo = () => {
         <h2>{translated['7db1a8b2']}</h2>
         <Cell
           title={translated['7db1a8b2']}
-          isLink
           onClick={() => {
             setShowIcon(true)
           }}
         />
         <Popup
           closeable
+          closeIcon={<CircleClose size="12px" />}
           visible={showIcon}
           style={{ height: '20%' }}
           position="bottom"
-          closeIconSize="12px"
           onClose={() => {
             setShowIcon(false)
           }}
         />
         <Cell
           title={translated.a52bef0c}
-          isLink
           onClick={() => {
             setShowIconPosition(true)
           }}
@@ -209,17 +210,15 @@ const PopupDemo = () => {
         />
         <Cell
           title={translated.d04fcbda}
-          isLink
           onClick={() => {
             setShowIconDefine(true)
           }}
         />
         <Popup
           closeable
-          closeIconSize="15px"
+          closeIcon={<Heart size="15px" />}
           visible={showIconDefine}
           style={{ height: '20%' }}
-          closeIcon="heart"
           position="bottom"
           onClose={() => {
             setShowIconDefine(false)
@@ -229,7 +228,6 @@ const PopupDemo = () => {
         <h2>{translated['0aaad620']}</h2>
         <Cell
           title={translated['0aaad620']}
-          isLink
           onClick={() => {
             setShowBottomRound(true)
           }}
@@ -248,7 +246,7 @@ const PopupDemo = () => {
         {/* <h2>{translated.ea3d02f2}</h2>
         <Cell
           title={translated.ea3d02f2}
-          isLink
+          
           onClick={() => {
             setShowMountNode(true)
           }}
@@ -267,7 +265,6 @@ const PopupDemo = () => {
         <h2>{translated.c9e6df49}</h2>
         <Cell
           title={translated.c9e6df49}
-          isLink
           onClick={() => {
             setShowMutiple(true)
           }}

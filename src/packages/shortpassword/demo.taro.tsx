@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
+import Taro from '@tarojs/taro'
+import { HeartFill1 } from '@nutui/icons-react-taro'
 import { ShortPassword, Cell, Toast } from '@/packages/nutui.react.taro'
 import Header from '@/sites/components/header'
-import Taro from '@tarojs/taro'
 import { useTranslate } from '@/sites/assets/locale/taro'
 
 const ShortPasswordDemo = () => {
@@ -51,7 +52,6 @@ const ShortPasswordDemo = () => {
         <h2>{translated.basic}</h2>
         <Cell
           title={translated.basic}
-          isLink
           onClick={() => {
             setVisible1(true)
           }}
@@ -59,6 +59,7 @@ const ShortPasswordDemo = () => {
         <ShortPassword
           visible={visible1}
           modelValue={value}
+          tipsIcon={<HeartFill1 size={11} />}
           onClose={() => {
             setVisible1(false)
             setValue('')
@@ -68,7 +69,6 @@ const ShortPasswordDemo = () => {
         <h2>{translated.displayButton}</h2>
         <Cell
           title={translated.displayButton}
-          isLink
           onClick={() => {
             setVisible2(true)
           }}
@@ -91,7 +91,6 @@ const ShortPasswordDemo = () => {
         <h2>{translated.customLength}</h2>
         <Cell
           title={translated.customLength}
-          isLink
           onClick={() => {
             setVisible3(true)
           }}
@@ -108,7 +107,6 @@ const ShortPasswordDemo = () => {
         <h2>{translated.forgetPassword}</h2>
         <Cell
           title={translated.forgetPassword}
-          isLink
           onClick={() => {
             setVisible4(true)
           }}
@@ -133,7 +131,6 @@ const ShortPasswordDemo = () => {
         <h2>自动聚焦</h2>
         <Cell
           title="自动聚焦"
-          isLink
           onClick={() => {
             setVisible5(true)
           }}

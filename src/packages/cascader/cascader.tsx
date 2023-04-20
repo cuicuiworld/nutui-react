@@ -48,7 +48,7 @@ export interface CascaderProps {
 const defaultProps = {
   className: '',
   style: {},
-  activeColor: '#fa2c19',
+  activeColor: '',
   checkedIcon: 'checklist',
   tabsColor: '',
   poppable: true,
@@ -296,7 +296,6 @@ const InternalCascader: ForwardRefRenderFunction<
   /* type: 是否是静默模式，是的话不触发事件
   tabsCursor: tab的索引 */
   const chooseItem = async (node: CascaderOption, type: boolean) => {
-    // console.log('chooseItem', node)
     if ((!type && node.disabled) || !state.panes[state.tabsCursor]) {
       return
     }
@@ -423,9 +422,9 @@ const InternalCascader: ForwardRefRenderFunction<
           visible={visible}
           position="bottom"
           round
+          closeIcon={closeIcon}
           closeable={closeable}
           closeIconPosition={closeIconPosition}
-          closeIcon={closeIcon}
           onClickOverlay={closePopup}
           onClickCloseIcon={closePopup}
         >

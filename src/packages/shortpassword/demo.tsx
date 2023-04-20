@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { HeartFill1 } from '@nutui/icons-react'
 import Cell from '../cell'
 import Toast from '../toast'
 import { ShortPassword } from './shortpassword'
@@ -43,7 +44,6 @@ const ShortPasswordDemo = () => {
       <h2>{translated.basic}</h2>
       <Cell
         title={translated.basic}
-        isLink
         onClick={() => {
           setVisible1(true)
         }}
@@ -60,7 +60,6 @@ const ShortPasswordDemo = () => {
       <h2>{translated.displayButton}</h2>
       <Cell
         title={translated.displayButton}
-        isLink
         onClick={() => {
           setVisible2(true)
         }}
@@ -68,6 +67,8 @@ const ShortPasswordDemo = () => {
       <ShortPassword
         visible={visible2}
         modelValue={value}
+        tipsIcon={<HeartFill1 />}
+        iconSize={16}
         onClose={() => {
           setVisible2(false)
           setValue('')
@@ -79,7 +80,6 @@ const ShortPasswordDemo = () => {
       <h2>{translated.customLength}</h2>
       <Cell
         title={translated.customLength}
-        isLink
         onClick={() => {
           setVisible3(true)
         }}
@@ -96,7 +96,6 @@ const ShortPasswordDemo = () => {
       <h2>{translated.forgetPassword}</h2>
       <Cell
         title={translated.forgetPassword}
-        isLink
         onClick={() => {
           setVisible4(true)
         }}
@@ -113,7 +112,6 @@ const ShortPasswordDemo = () => {
       <h2>自动聚焦</h2>
       <Cell
         title="自动聚焦"
-        isLink
         onClick={() => {
           setVisible5(true)
         }}

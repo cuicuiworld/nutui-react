@@ -144,7 +144,7 @@ const ActionSheetDemo = () => {
       <Header />
       <div className={`demo ${Taro.getEnv() === 'WEB' ? 'web' : ''}`}>
         <h2>{translated['74fc5d8a']}</h2>
-        <Cell isLink onClick={() => setIsVisible1(!isVisible1)}>
+        <Cell onClick={() => setIsVisible1(!isVisible1)}>
           <span>
             <label htmlFor={translated['84aa6bce']}>
               {translated['84aa6bce']}
@@ -152,7 +152,7 @@ const ActionSheetDemo = () => {
           </span>
           <div className="selected-option">{val1}</div>
         </Cell>
-        <Cell isLink onClick={() => setIsVisible2(!isVisible2)}>
+        <Cell onClick={() => setIsVisible2(!isVisible2)}>
           <span>
             <label htmlFor={translated['595d7bb3']}>
               {translated['595d7bb3']}
@@ -160,7 +160,7 @@ const ActionSheetDemo = () => {
           </span>
           <div className="selected-option">{val2}</div>
         </Cell>
-        <Cell isLink onClick={() => setIsVisible3(!isVisible3)}>
+        <Cell onClick={() => setIsVisible3(!isVisible3)}>
           <span>
             <label htmlFor={translated['0a1a6656']}>
               {translated['0a1a6656']}
@@ -169,13 +169,13 @@ const ActionSheetDemo = () => {
           <div className="selected-option">{val3}</div>
         </Cell>
         <h2>{translated.c3a08064}</h2>
-        <Cell isLink onClick={() => setIsVisible4(!isVisible4)}>
+        <Cell onClick={() => setIsVisible4(!isVisible4)}>
           <span>
             <label htmlFor={translated.c3a08064}>{translated.c3a08064}</label>
           </span>
         </Cell>
         <h2>{translated.c3a08065}</h2>
-        <Cell isLink onClick={() => setIsVisible5(!isVisible4)}>
+        <Cell onClick={() => setIsVisible5(!isVisible4)}>
           <span>
             <label htmlFor={translated.c3a08065}>{translated.c3a08065}</label>
           </span>
@@ -191,7 +191,7 @@ const ActionSheetDemo = () => {
         {/* demo(带取消按钮） */}
         <ActionSheet
           visible={isVisible2}
-          cancelTxt={translated['2cd0f3be']}
+          cancelText={translated['2cd0f3be']}
           menuItems={menuItemsOne}
           onChoose={chooseItemTwo}
           onCancel={() => setIsVisible2(false)}
@@ -200,7 +200,7 @@ const ActionSheetDemo = () => {
         <ActionSheet
           visible={isVisible3}
           description={translated.e1699442}
-          cancelTxt={translated['2cd0f3be']}
+          cancelText={translated['2cd0f3be']}
           menuItems={menuItemsTwo}
           onChoose={chooseItemThree}
           onCancel={() => setIsVisible3(false)}
@@ -208,7 +208,7 @@ const ActionSheetDemo = () => {
         {/* demo 选项状态 */}
         <ActionSheet
           visible={isVisible4}
-          cancelTxt={translated['2cd0f3be']}
+          cancelText={translated['2cd0f3be']}
           menuItems={menuItemsThree}
           chooseTagValue={translated['85dae65b']}
           onChoose={() => {
@@ -218,7 +218,7 @@ const ActionSheetDemo = () => {
         />
         <ActionSheet
           visible={isVisible5}
-          cancelTxt={translated['2cd0f3be']}
+          cancelText={translated['2cd0f3be']}
           chooseTagValue={translated['85dae65b']}
           onChoose={() => {
             setIsVisible5(false)

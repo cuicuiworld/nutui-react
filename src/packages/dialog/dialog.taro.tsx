@@ -7,7 +7,7 @@ import { useConfig } from '@/packages/configprovider/configprovider.taro'
 
 export type DialogProps = BasicDialogProps
 const defaultProps = {
-  okText: '',
+  confirmText: '',
   cancelText: '',
   mask: true,
   closeOnClickOverlay: true,
@@ -24,7 +24,7 @@ const defaultProps = {
 export const BaseDialog = forwardRef(
   (
     props: Partial<BasicDialogProps> &
-      Omit<React.HTMLAttributes<HTMLDivElement>, 'title'>,
+      Omit<React.HTMLAttributes<HTMLDivElement>, 'title' | 'content'>,
     ref
   ) => {
     const { locale } = useConfig()
@@ -36,7 +36,7 @@ export const BaseDialog = forwardRef(
       lockScroll,
       okBtnDisabled,
       cancelAutoClose,
-      okText,
+      confirmText,
       cancelText,
       onClosed,
       onCancel,
@@ -90,7 +90,7 @@ export const BaseDialog = forwardRef(
               disabled={okBtnDisabled}
               onClick={(e) => handleOk(e)}
             >
-              {okText || locale.confirm}
+              {confirmText || locale.confirm}
             </Button>
           )}
         </>

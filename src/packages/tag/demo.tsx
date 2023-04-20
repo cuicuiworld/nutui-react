@@ -1,4 +1,5 @@
 import React from 'react'
+import { CircleClose } from '@nutui/icons-react'
 import { Tag } from './tag'
 import Cell from '@/packages/cell'
 import CellGroup from '@/packages/cellgroup'
@@ -40,19 +41,19 @@ const TagDemo = () => {
         <CellGroup>
           <Cell
             title="primary"
-            linkSlot={<Tag type="primary">{translated.tag}</Tag>}
+            extra={<Tag type="primary">{translated.tag}</Tag>}
           />
           <Cell
             title="success"
-            linkSlot={<Tag type="success">{translated.tag}</Tag>}
+            extra={<Tag type="success">{translated.tag}</Tag>}
           />
           <Cell
             title="danger"
-            linkSlot={<Tag type="danger">{translated.tag}</Tag>}
+            extra={<Tag type="danger">{translated.tag}</Tag>}
           />
           <Cell
             title="warning"
-            linkSlot={<Tag type="warning">{translated.tag}</Tag>}
+            extra={<Tag type="warning">{translated.tag}</Tag>}
           />
         </CellGroup>
 
@@ -60,11 +61,11 @@ const TagDemo = () => {
         <CellGroup>
           <Cell
             title={translated.plain}
-            linkSlot={<Tag plain>{translated.tag}</Tag>}
+            extra={<Tag plain>{translated.tag}</Tag>}
           />
           <Cell
             title={translated.round}
-            linkSlot={
+            extra={
               <Tag round type="primary">
                 {translated.tag}
               </Tag>
@@ -72,7 +73,7 @@ const TagDemo = () => {
           />
           <Cell
             title={translated.mark}
-            linkSlot={
+            extra={
               <Tag mark type="primary">
                 {translated.tag}
               </Tag>
@@ -80,10 +81,18 @@ const TagDemo = () => {
           />
           <Cell
             title={translated.closeable}
-            linkSlot={
+            extra={
+              <Tag closeable onClose={() => alert('Tag closed')} type="primary">
+                {translated.tag}
+              </Tag>
+            }
+          />
+          <Cell
+            title={translated.closeable}
+            extra={
               <Tag
                 closeable
-                iconSize="14px"
+                closeIcon={<CircleClose width={12} height={12} />}
                 onClose={() => alert('Tag closed')}
                 type="primary"
               >
@@ -97,11 +106,11 @@ const TagDemo = () => {
         <CellGroup>
           <Cell
             title={translated.backgroundColor}
-            linkSlot={<Tag color="#FA685D">{translated.tag}</Tag>}
+            extra={<Tag color="#FA685D">{translated.tag}</Tag>}
           />
           <Cell
             title={translated.textColor}
-            linkSlot={
+            extra={
               <Tag color="#E9E9E9" textColor="#999999">
                 {translated.tag}
               </Tag>
@@ -109,7 +118,7 @@ const TagDemo = () => {
           />
           <Cell
             title={translated.plainColor}
-            linkSlot={
+            extra={
               <Tag color="#FA2400" plain>
                 {translated.tag}
               </Tag>

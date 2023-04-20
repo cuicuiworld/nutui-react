@@ -5,7 +5,7 @@ import React, {
   useEffect,
   useState,
 } from 'react'
-import Icon from '@/packages/icon/index.taro'
+import { CheckChecked, CheckNormal } from '@nutui/icons-react-taro'
 
 import RadioContext from './context'
 import RadioGroup from '@/packages/radiogroup/index.taro'
@@ -23,8 +23,8 @@ export interface RadioProps extends BasicComponent {
   shape: Shape
   textPosition: Position
   value: string | number | boolean
-  iconName: string
-  iconActiveName: string
+  icon: React.ReactNode
+  checkedIcon: React.ReactNode
   iconSize: string | number
   onChange: MouseEventHandler<HTMLDivElement>
 }
@@ -38,8 +38,8 @@ const defaultProps = {
   shape: 'round',
   value: '',
   textPosition: 'right',
-  iconName: 'check-normal',
-  iconActiveName: 'check-checked',
+  icon: null,
+  checkedIcon: null,
   iconSize: 18,
   onChange: (e) => {},
 } as RadioProps
@@ -57,12 +57,10 @@ export const Radio: FunctionComponent<
     shape,
     textPosition,
     value,
-    iconName,
-    iconActiveName,
+    icon,
+    checkedIcon,
     iconSize,
     onChange,
-    iconClassPrefix,
-    iconFontClassName,
     ...rest
   } = props
   const componentName = 'nut-radio'
@@ -110,18 +108,25 @@ export const Radio: FunctionComponent<
     return 'nut-radio__icon--unchecked'
   }
   const renderIcon = () => {
-    const { iconName, iconSize, iconActiveName } = props
+    const { icon, iconSize, checkedIcon } = props
 
-    return (
-      <Icon
-        classPrefix={iconClassPrefix}
-        fontClassName={iconFontClassName}
-        name={
-          !disabledStatement && checkedStatement ? iconActiveName : iconName
-        }
-        size={iconSize}
-        className={color()}
-      />
+    if (!disabledStatement && checkedStatement) {
+      return React.isValidElement(checkedIcon) ? (
+        React.cloneElement<any>(checkedIcon, {
+          ...checkedIcon.props,
+          className: color(),
+        })
+      ) : (
+        <CheckChecked size={iconSize} className={color()} />
+      )
+    }
+    return React.isValidElement(icon) ? (
+      React.cloneElement<any>(icon, {
+        ...icon.props,
+        className: color(),
+      })
+    ) : (
+      <CheckNormal size={iconSize} className={color()} />
     )
   }
   const reverseState = textPosition === 'left'

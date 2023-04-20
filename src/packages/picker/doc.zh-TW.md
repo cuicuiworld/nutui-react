@@ -80,13 +80,13 @@ const App = () => {
   ]
   return ( 
     <>   
-      <Cell isLink onClick={() => setIsVisible1(!isVisible1)}>
+      <Cell  onClick={() => setIsVisible1(!isVisible1)}>
         <span>
           <label>基礎用法</label>
         </span>
       </Cell>
       <Picker
-        isVisible={isVisible1}
+        visible={isVisible1}
         listData={listData1}
         onClose={() => setIsVisible1(false)}
         defaultValueData={[]}
@@ -118,13 +118,13 @@ const App = () => {
   ]
   return ( 
     <>   
-    <Cell isLink onClick={() => setIsVisible2(!isVisible2)}>
+    <Cell  onClick={() => setIsVisible2(!isVisible2)}>
       <span>
         <label>多列用法</label>
       </span>
     </Cell>
     <Picker
-      isVisible={isVisible2}
+      visible={isVisible2}
       listData={listData2}
       onClose={() => setIsVisible2(false)}
       defaultValueData={['周四', '下午']}
@@ -272,7 +272,7 @@ const App = () => {
   }
   return ( 
     <>   
-      <Cell isLink onClick={() => setIsVisible3(!isVisible3)}>
+      <Cell  onClick={() => setIsVisible3(!isVisible3)}>
         <span>
           <label>
             多級聯動
@@ -281,7 +281,7 @@ const App = () => {
         </span>
       </Cell>
       <Picker
-        isVisible={isVisible3}
+        visible={isVisible3}
         listData={custmerCityData}
         onClose={() => setIsVisible3(false)}
         defaultValueData={[]}
@@ -307,7 +307,7 @@ export default App;
 
 | 字段 | 說明 | 類型 | 默認值
 |----- | ----- | ----- | ----- 
-| isVisible | 是否可見 | boolean | `false`
+| visible`v2.0.0` | 是否可見 | boolean | `false`
 | title | 設置標題 | string | -
 | listData | 列錶數據 | Array | `[]`
 | defaultValueData | 默認選中 | Array | `[]`

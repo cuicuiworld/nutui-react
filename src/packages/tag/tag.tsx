@@ -4,8 +4,8 @@ import React, {
   useEffect,
   useState,
 } from 'react'
+import { Close } from '@nutui/icons-react'
 import classNames from 'classnames'
-import Icon from '@/packages/icon'
 
 import { BasicComponent, ComponentDefaults } from '@/utils/typings'
 
@@ -17,7 +17,7 @@ export interface TagProps extends BasicComponent {
   round: boolean
   mark: boolean
   closeable: boolean
-  iconSize?: string | number
+  closeIcon: React.ReactNode
   prefixCls: string
   onClick: (e: MouseEvent) => void
   onClose: (e?: any) => void
@@ -35,7 +35,7 @@ const defaultProps = {
   round: false,
   mark: false,
   closeable: false,
-  iconSize: '12px',
+  closeIcon: null,
   prefixCls: 'nut-tag',
   onClose: (e: any) => {},
   onClick: (e: MouseEvent) => {},
@@ -52,12 +52,10 @@ export const Tag: FunctionComponent<Partial<TagProps>> = (props) => {
     children,
     mark,
     closeable,
-    iconSize,
+    closeIcon,
     textColor,
     onClick,
     onClose,
-    iconClassPrefix,
-    iconFontClassName,
   } = {
     ...defaultProps,
     ...props,
@@ -74,10 +72,10 @@ export const Tag: FunctionComponent<Partial<TagProps>> = (props) => {
     round,
     mark,
     closeable,
-    iconSize,
     prefixCls,
     onClick,
     onClose,
+    className,
   ])
   const classes = () => {
     const prefixCls = 'nut-tag'
@@ -124,19 +122,26 @@ export const Tag: FunctionComponent<Partial<TagProps>> = (props) => {
             onClick={(e) => handleClick(e)}
           >
             {children && <span className="nut-tag-text">{children}</span>}
-            <Icon
-              classPrefix={iconClassPrefix}
-              fontClassName={iconFontClassName}
-              className="_icon"
-              name="close"
-              size={iconSize}
-              onClick={(e) => {
-                setIsTagShow(false)
-                if (props.onClose) {
-                  props.onClose(e)
-                }
-              }}
-            />
+            {React.isValidElement(closeIcon) ? (
+              <i
+                className="nut-tag-custom-icon"
+                onClick={(e) => {
+                  setIsTagShow(false)
+                  props.onClose && props.onClose(e)
+                }}
+              >
+                {closeIcon}
+              </i>
+            ) : (
+              <Close
+                width={12}
+                height={12}
+                onClick={(e) => {
+                  setIsTagShow(false)
+                  props.onClose && props.onClose(e)
+                }}
+              />
+            )}
           </div>
         )
       ) : (

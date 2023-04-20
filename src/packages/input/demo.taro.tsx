@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
+import Taro from '@tarojs/taro'
+import { Dongdong, Ask2 } from '@nutui/icons-react-taro'
 import { useTranslate } from '@/sites/assets/locale/taro'
 import { Input, Button } from '@/packages/nutui.react.taro'
 import Header from '@/sites/components/header'
-import Taro from '@tarojs/taro'
 
 interface Idata {
   val1: string
@@ -11,6 +12,7 @@ interface Idata {
   number: string
   digit: string
   tel: string
+  nickname: string
   readonly: string
   disabled: string
   showIcon: string
@@ -46,6 +48,7 @@ const InputDemo = () => {
       number: '数字',
       digit: '整数',
       tel: '手机号',
+      nickname: '昵称',
       readonly: '只读',
       disabled: '禁用',
       icon: '显示图标',
@@ -83,6 +86,7 @@ const InputDemo = () => {
       number: 'Number',
       digit: 'Digit',
       tel: 'Tel',
+      nickname: 'Nickname',
       readonly: 'Readonly',
       disabled: 'Disabled',
       icon: 'Show Icon',
@@ -209,6 +213,13 @@ const InputDemo = () => {
           defaultValue={state.tel}
           type="tel"
         />
+        <Input
+          name="nickname"
+          label={translated.nickname}
+          placeholder={translated.nickname}
+          type="nickname"
+          onChange={(val) => console.log('onChange', val)}
+        />
         <h2>{translated.title2}</h2>
         <Input
           label={translated.text}
@@ -227,8 +238,8 @@ const InputDemo = () => {
           label={translated.text}
           placeholder={translated.icon}
           defaultValue={state.showIcon}
-          leftIcon="dongdong"
-          rightIcon="ask2"
+          leftIcon={<Dongdong />}
+          rightIcon={<Ask2 />}
         />
         <Input
           label={translated.text}
@@ -329,8 +340,8 @@ const InputDemo = () => {
           label={translated.click}
           placeholder={translated.click}
           defaultValue={state.event}
-          leftIcon="dongdong"
-          rightIcon="ask2"
+          leftIcon={<Dongdong />}
+          rightIcon={<Ask2 />}
           clearable
           onChange={change}
           onFocus={focus}

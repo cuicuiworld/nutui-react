@@ -1,7 +1,12 @@
-import React, { useState, useEffect, useRef, FunctionComponent } from 'react'
+import React, {
+  useState,
+  useEffect,
+  useRef,
+  FunctionComponent,
+  ReactNode,
+} from 'react'
 import classNames from 'classnames'
 import bem from '@/utils/bem'
-import Icon from '@/packages/icon'
 import { useConfig } from '@/packages/configprovider'
 
 import { BasicComponent, ComponentDefaults } from '@/utils/typings'
@@ -13,11 +18,11 @@ export interface InfiniteloadingProps extends BasicComponent {
   useWindow: boolean
   useCapture: boolean
   isOpenRefresh: boolean
-  pullIcon: string
-  pullTxt: string
-  loadIcon: string
-  loadTxt: string
-  loadMoreTxt: string
+  pullIcon: ReactNode
+  pullText: string
+  loadIcon: ReactNode
+  loadingText: string
+  loadMoreText: string
   className: string
   style: React.CSSProperties
   onRefresh: (param: () => void) => void
@@ -35,13 +40,11 @@ const defaultProps = {
   useWindow: true,
   useCapture: false,
   isOpenRefresh: false,
-  pullIcon:
-    'https://img10.360buyimg.com/imagetools/jfs/t1/169863/6/4565/6306/60125948E7e92774e/40b3a0cf42852bcb.png',
-  pullTxt: '松开刷新',
-  loadIcon:
-    'https://img10.360buyimg.com/imagetools/jfs/t1/169863/6/4565/6306/60125948E7e92774e/40b3a0cf42852bcb.png',
-  loadTxt: '加载中···',
-  loadMoreTxt: '哎呀，这里是底部了啦',
+  pullIcon: null,
+  pullText: '松开刷新',
+  loadIcon: null,
+  loadingText: '加载中···',
+  loadMoreText: '哎呀，这里是底部了啦',
 } as InfiniteloadingProps
 
 export const Infiniteloading: FunctionComponent<
@@ -57,16 +60,14 @@ export const Infiniteloading: FunctionComponent<
     useCapture,
     isOpenRefresh,
     pullIcon,
-    pullTxt,
+    pullText,
     loadIcon,
-    loadTxt,
-    loadMoreTxt,
+    loadingText,
+    loadMoreText,
     className,
     onRefresh,
     onLoadMore,
     onScrollChange,
-    iconClassPrefix,
-    iconFontClassName,
     ...restProps
   } = {
     ...defaultProps,
@@ -249,20 +250,14 @@ export const Infiniteloading: FunctionComponent<
       className={classes}
       ref={scroller}
       onTouchStart={touchStart}
-      onTouchMove={touchMove}
       onTouchEnd={touchEnd}
       {...restProps}
     >
       <div className="nut-infinite-top" ref={refreshTop} style={getStyle()}>
         <div className="top-box">
-          <Icon
-            classPrefix={iconClassPrefix}
-            fontClassName={iconFontClassName}
-            className="top-img"
-            name={pullIcon}
-          />
+          {pullIcon && <>{pullIcon}</>}
           <span className="top-text">
-            {pullTxt || locale.infiniteloading.pullRefreshText}
+            {pullText || locale.infiniteloading.pullRefreshText}
           </span>
         </div>
       </div>
@@ -270,20 +265,15 @@ export const Infiniteloading: FunctionComponent<
       <div className="nut-infinite-bottom">
         {isInfiniting ? (
           <div className="bottom-box">
-            <Icon
-              classPrefix={iconClassPrefix}
-              fontClassName={iconFontClassName}
-              className="bottom-img"
-              name={loadIcon}
-            />
+            {loadIcon && <>{loadIcon}</>}
             <div className="bottom-text">
-              {loadTxt || locale.infiniteloading.loadText}
+              {loadingText || locale.infiniteloading.loadText}
             </div>
           </div>
         ) : (
           !hasMore && (
             <div className="tips">
-              {loadMoreTxt || locale.infiniteloading.loadMoreText}
+              {loadMoreText || locale.infiniteloading.loadMoreText}
             </div>
           )
         )}

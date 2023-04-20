@@ -31,7 +31,7 @@ const App = () => {
      <>
        <Cell
         title="Default Keyboard"
-        isLink
+        
         onClick={() => {
           setVisible(true)
         }}
@@ -68,7 +68,7 @@ const App = () => {
      <>
        <Cell
         title="Keyboard With Sidebar"
-        isLink
+        
         onClick={() => {
           setVisible(true)
         }}
@@ -107,7 +107,7 @@ const App = () => {
      <>
        <Cell
         title=" Random Key Order"
-        isLink
+        
         onClick={() => {
           setVisible(true)
         }}
@@ -144,7 +144,7 @@ const App = () => {
      <>
        <Cell
         title="Show Keyboard With Title"
-        isLink
+        
         onClick={() => {
           setVisible(true)
         }}
@@ -182,7 +182,7 @@ const App = () => {
      <>
        <Cell
         title="Show IdNumber Keyboard"
-        isLink
+        
         onClick={() => {
           setVisible(true)
         }}
@@ -216,7 +216,7 @@ export default App;
 | randomKeys | Whether to shuffle the order of keys  | boolean | `false` |
 | customKey | Content of bottom left key   | string[] |  Array form supports adding up to two |
 | confirmText  | Custom done button text,Such as "pay", "next", "submit" | string | `done` |
-| pop-class    | Custom bullet box classname     | string         | -             |
+| popClass    | Custom bullet box classname     | string         | -             |
 
 
 ### Event

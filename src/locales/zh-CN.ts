@@ -14,7 +14,7 @@ const zhCN: BaseLang = {
   },
   fixednav: {
     activeText: '收起导航',
-    unActiveText: '快速导航',
+    inactiveText: '快速导航',
   },
   infiniteloading: {
     pullRefreshText: '松开刷新',
@@ -32,6 +32,7 @@ const zhCN: BaseLang = {
     weekdays: ['日', '一', '二', '三', '四', '五', '六'],
     end: '结束',
     start: '开始',
+    confirm: '确认',
     title: '日历选择',
     monthTitle: (year: number, month: number) => `${year}年${month}月`,
     today: '今天',
@@ -40,7 +41,7 @@ const zhCN: BaseLang = {
   },
   shortpassword: {
     title: '请输入密码',
-    desc: '您使用了虚拟资产，请进行验证',
+    description: '您使用了虚拟资产，请进行验证',
     tips: '忘记密码',
   },
   uploader: {

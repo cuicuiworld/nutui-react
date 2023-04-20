@@ -23,14 +23,13 @@ import React from "react";
 import { Image } from '@nutui/nutui-react';
 
 const App = () => {
-const src =
+  const src =
     '//img10.360buyimg.com/ling/jfs/t1/181258/24/10385/53029/60d04978Ef21f2d42/92baeb21f907cd24.jpg'
   return <>
     <Image src={src} width="100" height="100" />
   </>
 }
 export default App;
-
 ```
 :::
 
@@ -44,19 +43,18 @@ import React from "react";
 import { Image } from '@nutui/nutui-react';
 
 const App = () => {
-const src =
+  const src =
     '//img10.360buyimg.com/ling/jfs/t1/181258/24/10385/53029/60d04978Ef21f2d42/92baeb21f907cd24.jpg'
   return <>
     <Image
-        src={src}
-        width="100"
-        height="100"
-        fit="contain"
+      src={src}
+      width="100"
+      height="100"
+      fit="contain"
     />
   </>
 }
 export default App;
-
 ```
 :::
 
@@ -70,26 +68,25 @@ import React from "react";
 import { Image } from '@nutui/nutui-react';
 
 const App = () => {
-const src =
+  const src =
     '//img10.360buyimg.com/ling/jfs/t1/181258/24/10385/53029/60d04978Ef21f2d42/92baeb21f907cd24.jpg'
   return <>
     <Image
-        src={src}
-        width="100"
-        height="100"
-        fit="contain"
-        position="left"
+      src={src}
+      width="100"
+      height="100"
+      fit="contain"
+      position="left"
     />
   </>
 }
 export default App;
-
 ```
 :::
 
 ### 圓形圖片
 
-通過 round 屬性可以設置圖片變圓，注意當圖片寬高不相等且 fit 為 contain 或 scale-down 時，將無法填充一個完整的圓形。
+通過 radius 屬性可以設置圖片變圓，注意當圖片寬高不相等且 fit 為 contain 或 scale-down 時，將無法填充一個完整的圓形。
 
 :::demo
 ```tsx
@@ -97,75 +94,73 @@ import React from "react";
 import { Image } from '@nutui/nutui-react';
 
 const App = () => {
-const src =
+  const src =
     '//img10.360buyimg.com/ling/jfs/t1/181258/24/10385/53029/60d04978Ef21f2d42/92baeb21f907cd24.jpg'
   return <>
     <Image
-        src={src}
-        width="100"
-        height="100"
-        round
+      src={src}
+      width="100"
+      height="100"
+      round
     />
   </>
 }
 export default App;
-
 ```
 :::
 
 ### 加載中圖片
 
-`Image` 組件提供了默認的加載中提示，支持通過 `loading` 插槽自定義內容。
+`Image` 組件提供了默認的加載中提示，支持通過 `loading` 自定義內容。
 
 :::demo
 ```tsx
 import React from "react";
-import { Image, Icon } from '@nutui/nutui-react';
+import { Image } from '@nutui/nutui-react';
+import { Loading } from '@nutui/icons-react';
 
 const App = () => {
-const src =
+  const src =
     '//img10.360buyimg.com/ling/jfs/t1/181258/24/10385/53029/60d04978Ef21f2d42/92baeb21f907cd24.jpg'
   return <>
     <Image
-        width="100"
-        height="100"
-        showLoading
-        slotLoding={
-            <>
-            <Icon name="loading" />
-            </>
-        }
+      width="100"
+      height="100"
+      loading={<Loading className="nut-icon-loading" />}
     />
   </>
 }
 export default App;
-
 ```
 :::
+
 ### 加載失敗
 
-`Image` 組件提供了默認的加載失敗提示，支持通過 `error` 插槽自定義內容。
+`Image` 組件提供了默認的加載失敗提示，支持通過 `error` 自定義內容。
 
 :::demo
 ```tsx
 import React from "react";
-import { Image, Icon } from '@nutui/nutui-react';
+import { Image } from '@nutui/nutui-react';
+import { CircleClose } from '@nutui/icons-react';
 
 const App = () => {
   return <>
-    <Image src="https://x" width="100" height="100" showError>
-        <Icon name="circle-close" />
-    </Image>
+    <Image
+      src="https://x"
+      width="100"
+      height="100"
+      error={<CircleClose />}
+    />
   </>
 }
 export default App;
-
 ```
 :::
 
 ### 圖片懶加載
 
-`Image` 組件提供了懶加載圖片功能，支持通過配置 `isLazy` 來實現，默認不開啟。
+`Image` 組件提供了懶加載圖片功能，支持通過配置 `lazy` 來實現，默認不開啟。
 
 :::demo
 ```tsx
@@ -173,11 +168,11 @@ import React from "react";
 import { Image,Cell } from '@nutui/nutui-react';
 
 const App = () => {
-const src =
+  const src =
     '//img10.360buyimg.com/ling/jfs/t1/181258/24/10385/53029/60d04978Ef21f2d42/92baeb21f907cd24.jpg'
-const imageData = [1, 2, 3, 4, 5, 6]
-const placeholderImg = 'https://img12.360buyimg.com/imagetools/jfs/t1/180776/26/8319/4587/60c094a8E1ef2ec9d/940780b87700b1d3.png'
-const style = `
+  const imageData = [1, 2, 3, 4, 5, 6]
+  const placeholderImg = 'https://img12.360buyimg.com/imagetools/jfs/t1/180776/26/8319/4587/60c094a8E1ef2ec9d/940780b87700b1d3.png'
+  const style = `
   .lazy-box{
     width:100%
   }
@@ -186,29 +181,26 @@ const style = `
   }
 `
   return <>
-  <style>{style}</style>
+    <style>{style}</style>
     <Cell>
-        <div className="lazy-box">
+      <div className="lazy-box">
         {imageData.map((item) => {
-            return (
+          return (
             <Image
-                key={item}
-                height="150"
-                src={src}
-                isLazy
-                showError
-                showLoading
-                loadingImg={placeholderImg}
-                errorImg={placeholderImg}
+              key={item}
+              height="150"
+              src={src}
+              lazy
+              loading={placeholderImg}
+              error={placeholderImg}
             />
-            )
+          )
         })}
-        </div>
+      </div>
     </Cell>
   </>
 }
 export default App;
-
 ```
 :::
 
@@ -217,25 +209,25 @@ export default App;
 
 ### Props
 
-| 參數         | 說明                             | 類型   | 默認值           |
-|--------------|----------------------------------|--------|------------------|
-| src         | 圖片鏈接               | string | -                |
-| fit         | 圖片填充模式，等同於原生的 object-fit 屬性     | ImageFit | `fill`                |
-| position    | 圖片位置，等同於原生的 object-position 屬性  | ImagePosition | `center`              |
-| alt         | 替代文本               | string | -                |
-| width         | 寬度，默認單位`px`               | string | -                |
-| height         | 高度，默認單位`px`               | string | -                |
-| round         | 是否顯示為圓角               | boolean | `false`              |
-| radius         | 圓角大小               | string \| number | -                |
-| showError         | 是否展示圖片加載失敗| boolean | `true`              |
-| showLoading         | 是否展示加載中圖片               | boolean | `true`              |
-| isLazy `v1.4.6`  | 是否為懶加載圖片               | boolean | `false`              |
-| loadingImg `v1.4.6`    | 設置加載中提示圖片，與slotLoding衝突，優先級高於slotLoding       | string | -              |
-| errorImg   `v1.4.6`    | 設置錯誤提示圖片，與slotError衝突，優先級高於slotError         | string | -              |
+| 屬性                  | 描述                             | 類型   | 默認值           |
+|---------------------|----------------------------------|--------|------------------|
+| src                 | 圖片鏈接               | `string` | -                |
+| fit                 | 圖片填充模式，等同於原生的 object-fit 屬性     | `ImageFit ` | `fill`                |
+| position            | 圖片位置，等同於原生的 object-position 屬性  | `ImagePosition` | `center`              |
+| alt                 | 替代文本               | `string` | -                |
+| width               | 寬度，默認單位`px`               | `string` | -                |
+| height              | 高度，默認單位`px`               | `string` | -                |
+| radius              | 圓角大小               | `string \| number` | -                |
+| error               | 是否展示圖片加載失敗| `boolean \| ReactNode` | `true`              |
+| loading             | 是否展示加載中圖片               | `boolean \| ReactNode` | `true`              |
+| lazy                | 是否為懶加載圖片               | `boolean` | `false`              |
+| onClick                | 點擊圖片時觸發               | `(e: MouseEvent) => void` | -              |
+| onLoad                | 圖片加載完後觸發               | `() => void` | -              |
+| onError                | 圖片加載失敗後觸發               | `() => void` | -              |
 
-### ImageFit 圖片填充模
+### ImageFit 圖片填充模式
 
-| 參數         | 說明                             |
+| 屬性         | 描述                             |
 |--------------|----------------------------------|
 | contain         | 保持寬高縮放圖片，使圖片的長邊能完全顯示出來    |
 | cover         | 保持寬高縮放圖片，使圖片的短邊能完全顯示出來，裁剪長邊     |
@@ -245,25 +237,10 @@ export default App;
 
 ### ImagePosition 圖片位置
 
-| 參數         | 說明                             |
+| 屬性         | 說明                             |
 |--------------|----------------------------------|
 | center         | 居中對齊    |
 | top         | 頂部對齊     |
 | right    | 右側對齊  |
 | bottom    | 底部對齊  |
 | left   | 左側對齊  |
-
-
-### Slots
-| 參數         | 說明                             |
-|--------------|----------------------------------|
-| slotLoding      | 自定義加載中的提示內容     |
-| slotError    | 自定義記載失敗的提示內容  |
-
-### Events
-
-| 事件名 | 說明           | 回調參數     |
-|--------|----------------|--------------|
-| onClick  | 點擊圖片時觸發 | `event: Event` |
-| onLoad  | 圖片加載完後觸發 | -- |
-| onError  | 圖片加載失敗後觸發 | -- |

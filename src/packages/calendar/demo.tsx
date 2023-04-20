@@ -205,6 +205,10 @@ const CalendarDemo = () => {
     console.log(param)
   }
 
+  const yearMonthChange = (param: string) => {
+    console.log(param)
+  }
+
   const goDate = () => {
     if (calendarRef.current) {
       calendarRef.current.scrollToDate('2023-04-01')
@@ -279,7 +283,7 @@ const CalendarDemo = () => {
         <h2>{translated.ce5c5446}</h2>
         <Cell
           title={translated.c38a08ef}
-          desc={date ? `${date} ${dateWeek}` : translated.b840c88f}
+          description={date ? `${date} ${dateWeek}` : translated.b840c88f}
           onClick={openSwitch}
         />
         <Calendar
@@ -295,7 +299,7 @@ const CalendarDemo = () => {
 
         <Cell
           title={translated.a74a1fd4}
-          desc={
+          description={
             date1
               ? `${date1[0]}${translated['8dab2f66']}${date1[1]}`
               : translated.b840c88f
@@ -315,7 +319,7 @@ const CalendarDemo = () => {
 
         <Cell
           title={translated['7db1a8b2']}
-          desc={
+          description={
             date4 && date4.length
               ? `${translated.a52bef0c}${date4.length}`
               : translated.b840c88f
@@ -335,7 +339,7 @@ const CalendarDemo = () => {
         <h2>{translated.cfbdc781}</h2>
         <Cell
           title={translated.c3a3a1d2}
-          desc={date3 ? `${date3}` : translated.b840c88f}
+          description={date3 ? `${date3}` : translated.b840c88f}
           onClick={openSwitch3}
         />
         <Calendar
@@ -349,7 +353,7 @@ const CalendarDemo = () => {
         />
         <Cell
           title={translated.a74a1fd4}
-          desc={
+          description={
             date1
               ? `${date5[0]}${translated['8dab2f66']}${date5[1]}`
               : translated.b840c88f
@@ -370,7 +374,7 @@ const CalendarDemo = () => {
         <h2>{translated.d04fcbda}</h2>
         <Cell
           title={translated['60a53514']}
-          desc={
+          description={
             date6
               ? `${date6[0]}${translated['8dab2f66']}${date6[1]}`
               : translated.b840c88f
@@ -395,7 +399,7 @@ const CalendarDemo = () => {
 
         <Cell
           title={translated['0aaad620']}
-          desc={
+          description={
             date7
               ? `${date7[0]}${translated['8dab2f66']}${date7[1]}`
               : translated.b840c88f
@@ -429,6 +433,7 @@ const CalendarDemo = () => {
             defaultValue={date2}
             isAutoBackFill
             onChoose={setChooseValue2}
+            onYearMonthChange={yearMonthChange}
           />
         </div>
       </div>

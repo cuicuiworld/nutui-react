@@ -1,44 +1,37 @@
 import React, {
   useState,
   useEffect,
+  useRef,
   FunctionComponent,
   ChangeEvent,
   FocusEvent,
 } from 'react'
+import { Minus, Plus } from '@nutui/icons-react-taro'
 import classNames from 'classnames'
-import Icon from '@/packages/icon/index.taro'
-import bem from '@/utils/bem'
+import { usePropsValue } from '@/utils/use-props-value'
 
 import { BasicComponent, ComponentDefaults } from '@/utils/typings'
 
 export interface InputNumberProps extends BasicComponent {
   disabled: boolean
-  buttonSize: string | number
   min: string | number
   max: string | number
-  inputWidth: string | number
   readonly: boolean
-  modelValue: string | number
+  value: string | number
+  defaultValue: string | number
+  allowEmpty: boolean
   step: string | number
-  decimalPlaces: string | number
-  isAsync: boolean
+  digits: string | number
+  async: boolean
   className: string
   style: React.CSSProperties
-  add: (e: MouseEvent) => void
-  reduce: (e: MouseEvent) => void
-  overlimit: (e: MouseEvent) => void
-  blur: (e: ChangeEvent<HTMLInputElement>) => void
-  focus: (e: FocusEvent<HTMLInputElement>) => void
-  change: (
-    param: string | number,
-    e: MouseEvent | ChangeEvent<HTMLInputElement>
-  ) => void
-  onAdd: (e: MouseEvent) => void
-  onReduce: (e: MouseEvent) => void
+  formatter?: (displayValue: string | number) => string
+  onPlus: (e: MouseEvent) => void
+  onMinus: (e: MouseEvent) => void
   onOverlimit: (e: MouseEvent) => void
-  onBlurFuc: (e: ChangeEvent<HTMLInputElement>) => void
+  onBlur: (e: ChangeEvent<HTMLInputElement>) => void
   onFocus: (e: FocusEvent<HTMLInputElement>) => void
-  onChangeFuc: (
+  onChange: (
     param: string | number,
     e: MouseEvent | ChangeEvent<HTMLInputElement>
   ) => void
@@ -47,90 +40,103 @@ export interface InputNumberProps extends BasicComponent {
 const defaultProps = {
   ...ComponentDefaults,
   disabled: false,
-  buttonSize: '',
   min: 1,
   max: 9999,
-  inputWidth: '',
   readonly: false,
-  modelValue: 0,
+  allowEmpty: false,
+  defaultValue: 0,
   step: 1,
-  decimalPlaces: 0,
-  isAsync: false,
+  digits: 0,
+  async: false,
 } as InputNumberProps
-function pxCheck(value: string | number): string {
-  return Number.isNaN(Number(value)) ? String(value) : `${value}px`
-}
+
+const classPrefix = `nut-inputnumber`
 export const InputNumber: FunctionComponent<
-  Partial<InputNumberProps> & React.HTMLAttributes<HTMLDivElement>
+  Partial<InputNumberProps> &
+    Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange' | 'onBlur'>
 > = (props) => {
   const {
     children,
     disabled,
-    buttonSize,
     min,
     max,
-    inputWidth,
     readonly,
-    modelValue,
-    decimalPlaces,
+    value,
+    defaultValue,
+    allowEmpty,
+    digits,
     step,
-    isAsync,
+    async,
     className,
     style,
-    add,
-    reduce,
-    change,
-    overlimit,
-    blur,
-    focus,
-    onAdd,
-    onReduce,
+    formatter,
+    onPlus,
+    onMinus,
     onOverlimit,
-    onBlurFuc,
+    onBlur,
     onFocus,
-    onChangeFuc,
-    iconClassPrefix,
-    iconFontClassName,
+    onChange,
     ...restProps
   } = {
     ...defaultProps,
     ...props,
   }
-  const [inputValue, setInputValue] = useState(modelValue)
-  useEffect(() => {
-    setInputValue(modelValue)
-  }, [modelValue])
+  const inputRef = useRef('')
 
-  const b = bem('inputnumber')
+  let [_checked, setChecked] = usePropsValue<string | number>({
+    value: value,
+    defaultValue: defaultValue,
+  })
+
+  useEffect(() => {
+    if (formatter) {
+      if (_checked || _checked === 0) {
+        inputRef.current = formatter(_checked)
+        setChecked(formatter(_checked))
+      }
+    }
+  }, [])
+
   const classes = classNames(
     {
-      [`${b('')}--disabled`]: disabled,
+      [`${classPrefix}`]: true,
+      [`${classPrefix}--disabled`]: disabled,
     },
-    className,
-    b('')
+    className
   )
+
   const styles = {
-    height: pxCheck(buttonSize),
     ...style,
   }
-  const addAllow = (value = Number(inputValue)) => {
-    return value < Number(max) && !disabled
+
+  const addAllow = (value = _checked) => {
+    if (formatter) {
+      const numValue = String(value).replace(/[^0-9|\.]/gi, '')
+      return Number(numValue) < Number(max) && !disabled
+    }
+
+    return Number(value) < Number(max) && !disabled
   }
 
-  const reduceAllow = (value = Number(inputValue)) => {
-    return value > Number(min) && !disabled
+  const reduceAllow = (value = _checked) => {
+    if (formatter) {
+      const numValue = String(value).replace(/[^0-9|\.]/gi, '')
+      return Number(numValue) > Number(min) && !disabled
+    }
+
+    return Number(value) > Number(min) && !disabled
   }
 
-  const iconMinusClasses = classNames('nut-inputnumber__icon', {
+  const iconMinusClasses = classNames('nut-inputnumber__icon icon-minus', {
     'nut-inputnumber__icon--disabled': !reduceAllow(),
   })
 
-  const iconAddClasses = classNames('nut-inputnumber__icon', {
+  const iconAddClasses = classNames('nut-inputnumber__icon icon-plus', {
     'nut-inputnumber__icon--disabled': !addAllow(),
   })
 
   const fixedDecimalPlaces = (v: string | number): string => {
-    return Number(v).toFixed(Number(decimalPlaces))
+    return Number(v).toFixed(Number(digits))
   }
 
   const emitChange = (
@@ -138,43 +144,96 @@ export const InputNumber: FunctionComponent<
     e: MouseEvent | ChangeEvent<HTMLInputElement>
   ) => {
     const outputValue: number | string = fixedDecimalPlaces(value)
-    onChangeFuc && onChangeFuc(outputValue, e)
-    change && change(outputValue, e)
-    if (!isAsync) {
-      setInputValue(outputValue)
+    onChange && onChange(outputValue, e)
+    if (!async) {
+      if (Number(outputValue) < Number(min)) {
+        formatter ? setChecked(formatter(Number(min))) : setChecked(Number(min))
+      } else if (Number(outputValue) > Number(max)) {
+        formatter ? setChecked(formatter(Number(max))) : setChecked(Number(max))
+      } else {
+        formatter ? setChecked(formatter(outputValue)) : setChecked(outputValue)
+      }
     }
   }
 
   const reduceNumber = (e: MouseEvent) => {
-    onReduce && onReduce(e)
-    reduce && reduce(e)
+    onMinus && onMinus(e)
     if (reduceAllow()) {
-      const outputValue = Number(inputValue) - Number(step)
-      emitChange(outputValue, e)
+      if (formatter) {
+        const numValue = String(_checked).replace(/[^0-9|\.]/gi, '')
+        const outputValue = Number(numValue) - Number(step)
+        inputRef.current = formatter(outputValue)
+        emitChange(outputValue, e)
+      } else {
+        const outputValue = Number(_checked) - Number(step)
+        emitChange(outputValue, e)
+      }
     } else {
       onOverlimit && onOverlimit(e)
-      overlimit && overlimit(e)
     }
   }
 
   const addNumber = (e: MouseEvent) => {
-    onAdd && onAdd(e)
-    add && add(e)
+    onPlus && onPlus(e)
     if (addAllow()) {
-      const outputValue = Number(inputValue) + Number(step)
-      emitChange(outputValue, e)
+      if (formatter) {
+        const numValue = String(_checked).replace(/[^0-9|\.]/gi, '')
+        const outputValue = Number(numValue) + Number(step)
+        inputRef.current = formatter(outputValue)
+        emitChange(outputValue, e)
+      } else {
+        const outputValue = Number(_checked) + Number(step)
+        emitChange(outputValue, e)
+      }
     } else {
       onOverlimit && onOverlimit(e)
-      overlimit && overlimit(e)
     }
   }
 
   const changeValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     const input = e.target as HTMLInputElement
-    change && change(input.value, e)
-    onChangeFuc && onChangeFuc(input.value, e)
-    if (!isAsync) {
-      setInputValue(input.value)
+    onChange && onChange(input.value, e)
+    if (!async) {
+      setChecked(input.value)
+    }
+  }
+
+  const changeFormatValue = (e: ChangeEvent<HTMLInputElement>) => {
+    const input = e.target.value
+
+    const numReg = new RegExp('^[0-9]*$')
+    const numValue = input.replace(/[^0-9|\.]/gi, '')
+
+    if (formatter) {
+      if (!numReg.test(input[0]) && numValue) {
+        setChecked(formatter(numValue))
+      } else if (!numReg.test(input[0]) && !numValue) {
+        setChecked(input)
+      } else if (numReg.test(input[0])) {
+        // 针对于100%这种尾字符例子，直接删除会进行匹配
+        if (formatter(numValue) === inputRef.current) {
+          setChecked(numValue)
+        } else {
+          setChecked(formatter(numValue))
+          inputRef.current = formatter(numValue)
+        }
+      }
+    }
+  }
+
+  const burFormatValue = (e: ChangeEvent<HTMLInputElement>) => {
+    const input = e.target.value
+
+    const numReg = new RegExp('^[0-9]*$')
+    const numValue = input.replace(/[^0-9|\.]/gi, '')
+    if (formatter) {
+      if (formatter(numValue) === input) {
+        emitChange(numValue, e)
+        return
+      }
+      if (!numReg.test(input) || !input) {
+        setChecked(formatter(''))
+      }
     }
   }
 
@@ -182,7 +241,6 @@ export const InputNumber: FunctionComponent<
     if (disabled) return
     if (readonly) return
     onFocus && onFocus(e)
-    focus && focus(e)
   }
 
   const burValue = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -190,49 +248,51 @@ export const InputNumber: FunctionComponent<
     if (readonly) return
     const input = e.target as HTMLInputElement
     let value = +input.value
+    if (value === 0 && !allowEmpty) {
+      value = Number(defaultValue)
+    }
     if (value < Number(min)) {
       value = Number(min)
     } else if (value > Number(max)) {
       value = Number(max)
     }
     emitChange(value, e)
-    onBlurFuc && onBlurFuc(e)
-    blur && blur(e)
+    onBlur && onBlur(e)
   }
   return (
     <div className={classes} style={styles} {...restProps}>
       <div className="nut-input-minus">
-        <Icon
-          classPrefix={iconClassPrefix}
-          fontClassName={iconFontClassName}
-          className={iconMinusClasses}
-          size={buttonSize}
-          name="minus"
-          onClick={reduceNumber}
-        />
+        <Minus className={iconMinusClasses} onClick={reduceNumber} />
       </div>
-      <input
-        className="nut-number-input"
-        type="number"
-        min={min}
-        max={max}
-        style={{ width: pxCheck(inputWidth) }}
-        disabled={disabled}
-        readOnly={readonly}
-        value={inputValue}
-        onInput={changeValue}
-        onBlur={burValue}
-        onFocus={focusValue}
-      />
+      <>
+        {formatter ? (
+          <input
+            type="text"
+            min={min}
+            max={max}
+            disabled={disabled}
+            readOnly={readonly}
+            value={_checked}
+            onInput={changeFormatValue}
+            onBlur={burFormatValue}
+            onFocus={focusValue}
+          />
+        ) : (
+          <input
+            type="digit"
+            min={min}
+            max={max}
+            disabled={disabled}
+            readOnly={readonly}
+            value={_checked}
+            onInput={changeValue}
+            onBlur={burValue}
+            onFocus={focusValue}
+          />
+        )}
+      </>
       <div className="nut-input-add">
-        <Icon
-          classPrefix={iconClassPrefix}
-          fontClassName={iconFontClassName}
-          className={iconAddClasses}
-          size={buttonSize}
-          name="plus"
-          onClick={addNumber}
-        />
+        <Plus className={iconAddClasses} onClick={addNumber} />
       </div>
     </div>
   )

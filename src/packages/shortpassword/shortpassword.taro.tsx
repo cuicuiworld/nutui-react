@@ -5,17 +5,20 @@ import React, {
   useRef,
   useState,
 } from 'react'
+import { Tips } from '@nutui/icons-react-taro'
+
 import bem from '@/utils/bem'
 import Popup from '@/packages/popup/index.taro'
-import Icon from '@/packages/icon/index.taro'
 import { useConfig } from '@/packages/configprovider/configprovider.taro'
 
 import { BasicComponent, ComponentDefaults } from '@/utils/typings'
 
 export interface ShortPasswordProps extends BasicComponent {
   title: string
-  desc: string
+  description: string
   tips: string
+  tipsIcon: React.ReactNode
+  iconSize: string | number
   visible: boolean
   modelValue: string | number
   errorMsg: string
@@ -36,8 +39,10 @@ export interface ShortPasswordProps extends BasicComponent {
 const defaultProps = {
   ...ComponentDefaults,
   title: '',
-  desc: '',
+  description: '',
   tips: '',
+  tipsIcon: null,
+  iconSize: 11,
   visible: false,
   modelValue: '',
   errorMsg: '',
@@ -60,8 +65,10 @@ export const ShortPassword: FunctionComponent<
   const { locale } = useConfig()
   const {
     title,
-    desc,
+    description,
     tips,
+    tipsIcon,
+    iconSize,
     visible,
     modelValue,
     errorMsg,
@@ -76,8 +83,6 @@ export const ShortPassword: FunctionComponent<
     onCancel,
     onClose,
     onComplete,
-    iconClassPrefix,
-    iconFontClassName,
     autoFocus,
     ...reset
   } = props
@@ -113,7 +118,6 @@ export const ShortPassword: FunctionComponent<
     const isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1 // g
     const isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/) // ios终端
     let style = {}
-    console.log(isIOS, isAndroid)
     if (isIOS) {
       style = {
         paddingRight: '1200px',
@@ -136,6 +140,16 @@ export const ShortPassword: FunctionComponent<
     onOk && onOk(inputValue)
   }
 
+  const renderIcon = (size: string | number = '11px') => {
+    return React.isValidElement(tipsIcon) ? (
+      React.cloneElement<any>(tipsIcon, {
+        ...tipsIcon.props,
+        size,
+      })
+    ) : (
+      <Tips size={size} />
+    )
+  }
   return (
     <div>
       <Popup
@@ -155,7 +169,7 @@ export const ShortPassword: FunctionComponent<
             {title || locale.shortpassword.title}
           </div>
           <div className={b('subtitle')}>
-            {desc || locale.shortpassword.desc}
+            {description || locale.shortpassword.description}
           </div>
 
           <div className={b('input')}>
@@ -186,14 +200,10 @@ export const ShortPassword: FunctionComponent<
             <div className={b('message__error')}>{errorMsg}</div>
             {tips || locale.shortpassword.tips ? (
               <div className={b('message__forget')}>
-                <Icon
-                  classPrefix={iconClassPrefix}
-                  fontClassName={iconFontClassName}
-                  className="icon"
-                  size="11px"
-                  name="tips"
-                />
-                <div onClick={onTips}>{tips || locale.shortpassword.tips}</div>
+                {renderIcon(iconSize)}
+                <div className={b('message__forget-tips')} onClick={onTips}>
+                  {tips || locale.shortpassword.tips}
+                </div>
               </div>
             ) : null}
           </div>

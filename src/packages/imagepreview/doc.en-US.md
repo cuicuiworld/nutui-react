@@ -50,13 +50,70 @@ const App = () => {
   return (
     <>
         <ImagePreview images={images} show={showPreview1} onClose={hideFn1} />
-        <Cell title="Show preview" isLink onClick={showFn1} />
+        <Cell title="Show preview"  onClick={showFn1} />
     </>
   );
 };
 export default App;
 ```
 :::
+
+### Click on the thumbnail to switch
+
+:::demo
+
+```tsx
+import React, { useState } from 'react';
+import { ImagePreview, Cell } from '@nutui/nutui-react';
+
+const App = () => {
+  const images = [
+    {
+      src: '//m.360buyimg.com/mobilecms/s750x366_jfs/t1/18629/34/3378/144318/5c263f64Ef0e2bff0/0d650e0aa2e852ee.jpg'
+    },
+    {
+      src: '//m.360buyimg.com/mobilecms/s750x366_jfs/t1/26597/30/4870/174583/5c35c5d2Ed55eedc6/50e27870c25e7a82.png'
+    },
+    {
+      src: '//m.360buyimg.com/mobilecms/s750x366_jfs/t1/9542/17/12873/201687/5c3c4362Ea9eb757d/60026b40a9d60d85.jpg'
+    },
+    {
+      src: '//m.360buyimg.com/mobilecms/s750x366_jfs/t1/30042/36/427/82951/5c3bfdabE3faf2f66/9adca782661c988c.jpg'
+    }
+  ];
+  const [init, setInit] = useState(0);
+
+  return (
+    <>
+      <Cell style={{ position: 'relative', zIndex: 10000 }}>
+        {images.map((image, index) =>
+          (<span
+            key={image.src}
+            onClick={() => setInit(index + 1)}
+            style={{ marginRight: '10px' }}
+          >
+              <img width={30}
+                   height={30}
+                   src={image.src}
+                   alt={image.src}
+              />
+            </span>)
+        )}
+      </Cell>
+      <ImagePreview
+        images={images}
+        show={init}
+        initNo={init}
+        onClose={hideFn2}
+      />
+    </>
+  );
+};
+export default App;
+```
+
+:::
+
 
 ### With Init No
 
@@ -93,7 +150,7 @@ const App = () => {
   return (
     <>
         <ImagePreview images={images} initNo={3} show={showPreview2} onClose={hideFn2} />
-        <Cell title="With init no" isLink onClick={showFn2} />
+        <Cell title="With init no"  onClick={showFn2} />
     </>
   );
 };
@@ -136,7 +193,7 @@ const App = () => {
   return (
     <>
         <ImagePreview images={images} show={showPreview3} paginationVisible paginationColor="red" onClose={hideFn3} />
-        <Cell title="With pagination" isLink onClick={showFn3} />
+        <Cell title="With pagination"  onClick={showFn3} />
     </>
   );
 };
@@ -202,7 +259,7 @@ const App = () => {
   return (
     <>
         <ImagePreview images={images} videos={videos} show={showPreview4} onClose={hideFn4} />
-        <Cell title="With videos" isLink onClick={showFn4} />
+        <Cell title="With videos"  onClick={showFn4} />
     </>
   );
 };

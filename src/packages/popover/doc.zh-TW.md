@@ -58,15 +58,16 @@ export default App;
 :::demo
 ```tsx
 import  React, { useState, useRef  } from "react";
-import { Popover,Button,Icon } from '@nutui/nutui-react';
+import { Popover,Button } from '@nutui/nutui-react';
+import { My2, Cart2, Location2 } from '@nutui/icons-react'
 
 const App = () => {
   const [showIcon, setShowIcon] = useState(false)
   const [disableAction, setDisableAction] = useState(false)
   const iconItemList= [
-    {name: 'option1',icon: 'my2'},
-    {name: 'option2',icon: 'cart2'},
-    {name: 'option3',icon: 'location2'}
+    {name: 'option1',icon: <My2/>},
+    {name: 'option2',icon: <Cart2/>},
+    {name: 'option3',icon: <Location2/>}
   ];
   const itemListDisabled=[
     {name: 'option1',disabled: true},
@@ -102,34 +103,35 @@ export default App;
 :::demo
 ```tsx
 import  React, { useState, useRef  } from "react";
-import { Popover,Button, Icon } from '@nutui/nutui-react';
+import { Popover,Button } from '@nutui/nutui-react';
+import { Service, Notice, Location, Category, Scan2, Message} from "@nutui/icons-react";
 
 const App = () => {
   const [customized, setCustomized] = useState(false)
   const selfContent= [
     {
-      name: 'service',
-      desc: 'option1'
+      name: <Service size={15}/>,
+      description: 'option1'
     },
     {
-      name: 'notice',
-      desc: 'option2'
+      name: <Notice  size={15}/>,
+      description: 'option2'
     },
     {
-      name: 'location',
-      desc: 'option3'
+      name: <Location size={15}/>,
+      description: 'option3'
     },
     {
-      name: 'category',
-      desc: 'option4'
+      name: <Category size={15}/>,
+      description: 'option4'
     },
     {
-      name: 'scan2',
-      desc: 'option5'
+      name: <Scan2 size={15}/>,
+      description: 'option5'
     },
     {
-      name: 'message',
-      desc: 'option6'
+      name: <Message size={15}/>,
+      description: 'option6'
     }
   ];
 
@@ -145,12 +147,12 @@ const App = () => {
           {
             selfContent.map((item: any)=>{
               return <div className="self-content-item" style={selfContentItem} key={item.name}>
-                <Icon name={item.name} size="15" />
-                <div className="self-content-desc" style={selfContentDesc}>{ item.desc }</div>
+                    {item.name}
+                <div className="self-content-description" style={seldescriptiontendescriptionc}>descriptionem.description }</div>
               </div>
             })
           }
-        </div> : ''
+        </div> : null
         }
       </Popover>
     </>
@@ -170,7 +172,7 @@ left          # 左側中間位置
 right         # 右側中間位置
 bottom        # 底部中間位置
 ```
-自 `v1.3.0` 起新增
+自  起新增
 ```
 top-start     # 頂部左側位置
 top-end       # 頂部右側位置 
@@ -225,7 +227,7 @@ export default App;
 | visible      | 是否展示氣泡彈出層                 | boolean  | `false`     |
 | theme          | 主題風格，可選值為 dark            | string   | `light`   |
 | location       | 彈出位置  | string   | `bottom`  |
-| offset `v1.3.0`       | 出現位置的偏移量  | number   | `20`  |
+| offset        | 出現位置的偏移量  | number   | `20`  |
 
 ### List 數據結構  
 

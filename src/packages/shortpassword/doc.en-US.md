@@ -30,7 +30,7 @@ const App = () => {
      <>
        <Cell
         title="Basic Usage"
-        isLink
+        
         onClick={() => {
           setVisible(true)
         }}
@@ -55,6 +55,7 @@ export default App;
 ```tsx
 import React, { useState } from "react";
 import { Cell,ShortPassword } from '@nutui/nutui-react';
+import { HeartFill1 } from '@nutui/icons-react';
 
 const App = () => {
   const [visible,setVisible] = useState(false)
@@ -70,21 +71,23 @@ const App = () => {
      <>
        <Cell
         title="Show Button Group"
-        isLink
+        
         onClick={() => {
           setVisible(true)
         }}
        />
         <ShortPassword
-        visible={visible}
-        modelValue={value}
-        onClose={() => close()}
-        noButton={false}
-        onChange={(value) => setValue(value)}
-        onOk={() => setVisible(false)}
-        onCancel={() => setVisible(false)}
-       />
-     </>
+          visible={visible}
+          modelValue={value}
+          tipsIcon={<HeartFill1 />}
+          iconSize={16}
+          onClose={() => close()}
+          noButton={false}
+          onChange={(value) => setValue(value)}
+          onOk={() => setVisible(false)}
+          onCancel={() => setVisible(false)}
+        />
+      </>
   )
 }
 export default App;
@@ -113,7 +116,7 @@ const App = () => {
      <>
        <Cell
         title="Custom Password Length"
-        isLink
+        
         onClick={() => {
           setVisible(true)
         }}
@@ -153,7 +156,7 @@ const App = () => {
      <>
        <Cell
         title="Forget password"
-        isLink
+        
         onClick={() => {
           setVisible(true)
         }}
@@ -184,13 +187,15 @@ export default App;
 | modelValue         | Current value                | string \| number | -                |
 | visible        | Whether to show shortpassword                         | boolean | `false`              |
 | title                  | title                | string         | `Please input a password`                   |
-| desc                   | desc          | string         | `Verify` |
+| description                   | description          | string         | `Verify` |
 | tips                   | tips              | string         | `Forget password`                     |
 | closeOnClickOverlay | Click to close the mask      | boolean        | `true`                         |
 | noButton              | whether to hide the bottom button    | boolean        | `true`                         |
 | length                 | ShortPassword lenght The value is 4~6 | string \| number | `6`                            |
 | errorMsg              | Error message         | string         | -                           |
 | autoFocus              | Be focused when ShortPassword is displayed | boolean         | `false`                           |
+| tipsIcon `v2.0.0` | icon of forget tips | `ReactNode`  | - |
+| iconSize `v2.0.0` | size of icon | string \| number  | `11` |
 
 ### Events
 

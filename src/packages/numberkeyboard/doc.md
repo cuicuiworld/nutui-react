@@ -31,7 +31,7 @@ const App = () => {
      <>
        <Cell
         title="基础用法"
-        isLink
+        
         onClick={() => {
           setVisible(true)
         }}
@@ -68,7 +68,7 @@ const App = () => {
      <>
        <Cell
         title="带右侧栏键盘"
-        isLink
+        
         onClick={() => {
           setVisible(true)
         }}
@@ -107,7 +107,7 @@ const App = () => {
      <>
        <Cell
         title="随机数键盘"
-        isLink
+        
         onClick={() => {
           setVisible(true)
         }}
@@ -144,7 +144,7 @@ const App = () => {
      <>
        <Cell
         title="带标题栏键盘"
-        isLink
+        
         onClick={() => {
           setVisible(true)
         }}
@@ -182,7 +182,7 @@ const App = () => {
      <>
        <Cell
         title="身份证键盘"
-        isLink
+        
         onClick={() => {
           setVisible(true)
         }}
@@ -216,7 +216,7 @@ export default App;
 | randomKeys | 随机数  | boolean | `false` |
 | customKey | 自定义键盘额外的键  | string[] | 数组形式最多支持添加2个,超出默认取前2项 |
 | confirmText  | 自定义完成按钮文字，如"支付"，"下一步"，"提交"等 | string | `完成` |
-| pop-class    | 自定义弹框类名     | string         | -             |
+| popClass    | 自定义弹框类名     | string         | -             |
 
 
 ### Event
